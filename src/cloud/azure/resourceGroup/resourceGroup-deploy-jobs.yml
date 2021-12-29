@@ -1,12 +1,11 @@
 parameters:
-- name: serviceConnection
-  type: string
+- name: settings
+  type: object
 - name: resource
   type: object
 - name: environment
   type: string
-- name: settings
-  type: object
+
 
 jobs:
   - deployment: 
@@ -20,10 +19,11 @@ jobs:
             #   inputs:
             #     source: 'current'
             #     path: '$(Pipeline.Workspace)'
+            
             - powershell: |
-                Write-Host ${{ parameters.settings.azureServiceConnection }}
-                Write-Host ${{ parameters.settings.subscriptionId }}
-                Write-Host ${{ parameters.settings.location }}
+                Write-Host "Service Connection: ${{ parameters.settings.azureServiceConnection }}"
+                Write-Host "subscriptionId: ${{ parameters.settings.subscriptionId }}"
+                Write-Host "location: ${{ parameters.settings.location }}"
 
                 Get-ChildItem $(Pipeline.Workspace)
 
