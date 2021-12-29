@@ -22,3 +22,13 @@ stages:
           parameters:
             settings: ${{ parameters.settings }}
             resources: ${{ parameters.resources }}
+
+  - ${{ if eq(parameters.settings.deploy.enabled, 'true') }}:
+    - ${{ each env in parameters.settings.environments }}:
+      - stage: ${{ env }}
+        jobs:
+          - job: BuildJob
+            displayName: Build Job
+            steps:
+              - powershell: |
+                  Write-Host "Release ${{ env }}"

@@ -14,7 +14,11 @@ extends:
     settings:
       build:
         enabled: true
+      deploy:
+        enabled: true
       azureServiceConnection: $(azureServiceConnection)
+      environments:
+        - dev
     resources:
       - name: RG-example
         type: resourceGroup
