@@ -12,7 +12,7 @@ jobs:
     - ${{ if eq(resource.enabled, 'true') }}:
 
       - ${{ if eq(resource.type, 'resourceGroup') }}:
-        - template: ./../cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
+        - template: ../cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}
             resource: ${{ resource }}
