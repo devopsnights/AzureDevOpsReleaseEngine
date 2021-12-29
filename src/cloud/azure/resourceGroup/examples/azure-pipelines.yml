@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+    - main
+    - feature/v0.1
+
+pool:
+  vmImage: 'windows-latest'
+
+extends: 
+  template: ./../../../main.yml
+  parameters:
+    settings:
+      build:
+        enabled: true
+    resources:
+      - name: RG-example
+        type: resourceGroup
+        enabled: true

@@ -1,0 +1,21 @@
+parameters:
+  - name: settings
+    type: string
+  - name: resource
+    type: object
+
+jobs:
+  - job: BuildJob
+    displayName: Build Job
+    steps:
+
+      - template: ../bicep/bicep-build-tasks.yml
+        parameters:
+          serviceConnection: ${{ parameters.settings.serviceConnection }}
+          bicepFilePath: ${{ parameters.resource.deployment.infrastructure.iacFilePath }}
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(build.artifactstagingdirectory)'
+          artifact: ${{ parameters.resource.type }}
+          publishLocation: 'pipeline'

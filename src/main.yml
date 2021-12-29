@@ -1,0 +1,16 @@
+parameters:
+  - name: settings
+    type: object
+  - name: resources
+    type: object
+
+stages:
+
+  - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
+    - stage: build
+      jobs:
+        
+        - template: ./_jobs/build-jobs.yml
+          parameters:
+            globalSettings: ${{ parameters.settings.globalSettings.epam }}
+            resources: ${{ parameters.settings.resources }}
