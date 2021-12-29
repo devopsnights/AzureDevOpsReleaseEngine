@@ -12,5 +12,5 @@ stages:
         
         - template: ./_jobs/build-jobs.yml
           parameters:
-            globalSettings: ${{ parameters.settings.globalSettings.epam }}
+            settings: ${{ parameters.settings }}
             resources: ${{ parameters.settings.resources }}
