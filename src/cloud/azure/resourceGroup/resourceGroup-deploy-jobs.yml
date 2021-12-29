@@ -24,8 +24,8 @@ jobs:
                 Write-Host "Service Connection: ${{ parameters.settings.azureServiceConnection }}"
                 Write-Host "subscriptionId: ${{ parameters.settings.subscriptionId }}"
                 Write-Host "location: ${{ parameters.settings.location }}"
-                Write-Host "location: ${{ parameters.settings.legume }}"
 
+                Get-ChildItem -Path env:
                 Get-ChildItem $(Pipeline.Workspace)
 
             # - task: AzureResourceManagerTemplateDeployment@3
