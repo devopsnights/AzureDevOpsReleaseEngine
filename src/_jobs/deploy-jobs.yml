@@ -1,0 +1,18 @@
+parameters:
+  - name: settings
+    type: object
+  - name: resources
+    type: object
+  - name: environment
+    type: string
+
+jobs:
+  - ${{ each resource in parameters.resources }}:
+      - ${{ if eq(resource.enabled, 'true') }}:
+          
+          - ${{ if eq(resource.type, 'resourceGroup') }}:
+              - template: ../cloud/azure/resourceGroup/resourceGroup-deploy-jobs.yml
+                parameters:
+                  settings: ${{ parameters.settings }}
+                  resource: ${{ resource }}
+                  environment: ${{ parameters.environment }}

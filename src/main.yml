@@ -28,8 +28,8 @@ stages:
           - template: ./cloud/azure/resourceGroup/examples/variables/${{ env }}-vars.yml
 
         jobs:
-          - job: BuildJob
-            displayName: Build Job
-            steps:
-              - powershell: |
-                  Write-Host ${{ parameters.settings.randomVariable }}
+          - template: ./_jobs/deploy-jobs.yml
+            parameters:
+              globalSettings: ${{ parameters.settings.globalSettings.epam }}
+              resources: ${{ parameters.settings.resources }}
+              environment: ${{ env }}
