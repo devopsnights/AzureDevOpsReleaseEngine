@@ -31,4 +31,4 @@ stages:
             displayName: Build Job
             steps:
               - powershell: |
-                  Write-Host "Release ${{ parameters.settings.randomVariable }}"
+                  Write-Host ${{ parameters.settings.randomVariable }}
