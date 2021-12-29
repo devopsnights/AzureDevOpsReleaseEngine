@@ -1,6 +1,6 @@
 parameters:
   - name: settings
-    type: string
+    type: object
   - name: resources
     type: object
 
