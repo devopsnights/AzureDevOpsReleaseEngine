@@ -8,16 +8,22 @@ steps:
   
   - powershell: |
       Write-Host "Service Connection: ${{ parameters.azureServiceConnection }}"
-      
-  - task: AzureCLI@2  
-    displayName: 'Build bicep artifact' 
-    inputs: 
-      azureSubscription: ${{ parameters.azureServiceConnection }}
-      scriptType: 'pscore'  
-      scriptLocation: 'inlineScript'  
-      inlineScript: |
-        $file = $env:bicepFilePath
-        New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/infrastructure
-        az bicep build --file $file --outdir $(build.artifactstagingdirectory)/infrastructure
+
+      $file = $env:bicepFilePath
+      New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/infrastructure
+      az bicep build --file $file --outdir $(build.artifactstagingdirectory)/infrastructure      
     env:
-        bicepFilePath: ${{ parameters.bicepFilePath }}
+          bicepFilePath: ${{ parameters.bicepFilePath }}
+  
+  # - task: AzureCLI@2  
+  #   displayName: 'Build bicep artifact' 
+  #   inputs: 
+  #     azureSubscription: ${{ parameters.azureServiceConnection }}
+  #     scriptType: 'pscore'  
+  #     scriptLocation: 'inlineScript'  
+  #     inlineScript: |
+  #       $file = $env:bicepFilePath
+  #       New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/infrastructure
+  #       az bicep build --file $file --outdir $(build.artifactstagingdirectory)/infrastructure
+  #   env:
+  #       bicepFilePath: ${{ parameters.bicepFilePath }}
