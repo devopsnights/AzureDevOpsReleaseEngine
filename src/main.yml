@@ -13,4 +13,4 @@ stages:
         - template: ./_jobs/build-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}
-            resources: ${{ parameters.settings.resources }}
+            resources: ${{ parameters.resources }}
