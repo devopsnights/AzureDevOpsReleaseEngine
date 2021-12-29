@@ -17,8 +17,9 @@ extends:
       deploy:
         enabled: true
       azureServiceConnection: $(azureServiceConnection)
-      subscriptionId: $(location)
+      subscriptionId: $(subscriptionId)
       location: $(location)
+      legume: $(legume)
       environments:
         - dev
         - uat
