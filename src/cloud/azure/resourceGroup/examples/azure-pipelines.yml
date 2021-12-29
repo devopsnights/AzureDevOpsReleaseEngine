@@ -7,6 +7,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  - template: ./variables/dev-vars.yml
+
 extends: 
   template: ../../../../main.yml
   parameters:
@@ -17,3 +20,4 @@ extends:
       - name: RG-example
         type: resourceGroup
         enabled: true
+        azureServiceConnection: ServiceConnection
