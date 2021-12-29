@@ -4,6 +4,9 @@ parameters:
   - name: resources
     type: object
 
+variables:
+  - azureServiceConnection: ServiceConnection
+
 stages:
 
   - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
