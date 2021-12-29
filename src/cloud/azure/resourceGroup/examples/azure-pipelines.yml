@@ -13,13 +13,14 @@ extends:
   parameters:
     settings:
       build:
-        enabled: true
+        enabled: false
       deploy:
         enabled: true
       azureServiceConnection: $(azureServiceConnection)
       randomVariable: $(randomVariable)
       environments:
         - dev
+        - uat
     resources:
       - name: RG-example
         type: resourceGroup
