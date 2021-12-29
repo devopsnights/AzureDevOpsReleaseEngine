@@ -4,6 +4,10 @@ parameters:
   - name: resources
     type: object
 
+variables:
+  - name: azureServiceConnection
+    value: ServiceConnection
+
 stages:
 
   - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
@@ -11,9 +15,7 @@ stages:
       
       variables:
         - template: ./cloud/azure/resourceGroup/examples/variables/dev-vars.yml
-        - name: azureServiceConnection
-          value: ServiceConnection      
-          
+      
       jobs:
         
         - template: ./_jobs/build-jobs.yml
