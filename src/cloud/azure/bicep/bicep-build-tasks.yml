@@ -8,7 +8,7 @@ steps:
   - task: AzureCLI@2  
     displayName: 'Build bicep artifact' 
     inputs: 
-      azureSubscription: ${{ parameters.serviceConnection }}
+      azureSubscription: ${{ parameters.azureServiceConnection }}
       scriptType: 'pscore'  
       scriptLocation: 'inlineScript'  
       inlineScript: |
