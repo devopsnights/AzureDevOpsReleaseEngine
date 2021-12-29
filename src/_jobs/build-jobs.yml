@@ -4,6 +4,10 @@ parameters:
   - name: resources
     type: object
 
+
+variables:
+  - template: ./variables/dev-vars.yml
+
 jobs:
 
   # call build template for each resource

@@ -7,8 +7,6 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  - template: ./variables/dev-vars.yml
 
 extends: 
   template: ../../../../main.yml
