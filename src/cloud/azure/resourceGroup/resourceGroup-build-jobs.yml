@@ -11,7 +11,7 @@ jobs:
 
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
-          azureServiceConnection: ServiceConnection #${{ parameters.settings.azureServiceConnection }}
+          azureServiceConnection: ${{ parameters.settings.azureServiceConnection }}
           bicepFilePath: ${{ parameters.resource.deployment.infrastructure.iacFilePath }}
 
       - task: PublishPipelineArtifact@1

@@ -16,8 +16,9 @@ extends:
     settings:
       build:
         enabled: true
+      azureServiceConnection: ServiceConnection
     resources:
       - name: RG-example
         type: resourceGroup
         enabled: true
-        azureServiceConnection: ServiceConnection
+        
