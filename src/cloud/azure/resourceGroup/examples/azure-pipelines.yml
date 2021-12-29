@@ -8,7 +8,7 @@ pool:
   vmImage: 'windows-latest'
 
 extends: 
-  template: ./../../../main.yml
+  template: ../../../../main.yml
   parameters:
     settings:
       build:
