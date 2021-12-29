@@ -5,6 +5,10 @@ parameters:
     type: string
 
 steps:
+  
+  - powershell: |
+      Write-Host "Service Connection: ${{ parameters.azureServiceConnection }}"
+      
   - task: AzureCLI@2  
     displayName: 'Build bicep artifact' 
     inputs: 
