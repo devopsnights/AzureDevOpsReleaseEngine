@@ -13,7 +13,7 @@ extends:
   parameters:
     settings:
       build:
-        enabled: false
+        enabled: true
       deploy:
         enabled: true
       azureServiceConnection: $(azureServiceConnection)
