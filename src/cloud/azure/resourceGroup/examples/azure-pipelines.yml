@@ -17,6 +17,7 @@ extends:
       deploy:
         enabled: true
       azureServiceConnection: $(azureServiceConnection)
+      randomVariable: $(randomVariable)
       environments:
         - dev
     resources:
