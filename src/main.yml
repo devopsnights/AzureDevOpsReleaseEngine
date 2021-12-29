@@ -13,9 +13,6 @@ stages:
   - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
     - stage: build
       
-      variables:
-        - template: ./cloud/azure/resourceGroup/examples/variables/dev-vars.yml
-      
       jobs:
         
         - template: ./_jobs/build-jobs.yml
@@ -26,6 +23,10 @@ stages:
   - ${{ if eq(parameters.settings.deploy.enabled, 'true') }}:
     - ${{ each env in parameters.settings.environments }}:
       - stage: ${{ env }}
+      
+        variables:
+          - template: ./cloud/azure/resourceGroup/examples/variables/dev-vars.yml
+
         jobs:
           - job: BuildJob
             displayName: Build Job
