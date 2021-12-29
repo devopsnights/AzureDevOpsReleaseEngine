@@ -8,6 +8,10 @@ stages:
 
   - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
     - stage: build
+      
+      variables:
+        - template: ./variables/dev-vars.yml
+      
       jobs:
         
         - template: ./_jobs/build-jobs.yml
