@@ -10,7 +10,7 @@ parameters:
 jobs:
   - deployment: 
     displayName: Azure Web App Deployment
-    environment: develop
+    environment: ${{ parameters.environment }}
     strategy:
       runOnce:
         deploy:
