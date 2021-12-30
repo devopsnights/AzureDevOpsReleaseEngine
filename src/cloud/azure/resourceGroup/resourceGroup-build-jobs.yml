@@ -9,7 +9,6 @@ jobs:
 
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
-          azureServiceConnection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}
           bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/resourceGroup/resourceGroup.bicep
 
       - task: PublishPipelineArtifact@1
