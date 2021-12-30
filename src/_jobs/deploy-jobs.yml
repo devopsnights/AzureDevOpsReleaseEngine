@@ -23,3 +23,10 @@ jobs:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
             resource: ${{ resource }}
+
+      - ${{ if eq(resource.type, 'appService') }}:
+        - template: ../cloud/azure/appService/appService-deploy-jobs.yml
+          parameters:
+            settings: ${{ parameters.settings }}                  
+            environment: ${{ parameters.environment }}
+            resource: ${{ resource }}
