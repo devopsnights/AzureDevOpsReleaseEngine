@@ -5,3 +5,4 @@ variables:
   resourceGroupName: rg-app-releaseengine-dev
 
   appServiceName: app-releaseengine-dev
+  servicePlanName: plan-releaseengine-dev
