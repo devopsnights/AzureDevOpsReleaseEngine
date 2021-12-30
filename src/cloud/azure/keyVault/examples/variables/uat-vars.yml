@@ -2,6 +2,6 @@ variables:
   azureServiceConnection: ServiceConnection
   subscriptionId: 337ba254-3aa0-4551-ba8e-89debefaa373
   location: northeurope  
-  resourceGroupName: rg-releaseengine-uat
+  resourceGroupName: rg-kv-releaseengine-uat
 
   keyVaultName: kv-releaseengine-uat

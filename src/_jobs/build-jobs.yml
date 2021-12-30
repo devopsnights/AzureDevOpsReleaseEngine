@@ -12,13 +12,13 @@ jobs:
       parameters:
         settings: ${{ parameters.settings }}        
   
-  # # call build template for each resource
-  # - ${{ each resource in parameters.resources }}:
+  # call build template for each resource
+  - ${{ each resource in parameters.resources }}:
     
-  #   - ${{ if eq(resource.enabled, 'true') }}:
+    - ${{ if eq(resource.enabled, 'true') }}:
 
-  #     - ${{ if eq(resource.type, 'resourceGroup') }}:
-  #       - template: ../cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
-  #         parameters:
-  #           settings: ${{ parameters.settings }}
-  #           resource: ${{ resource }}
+      - ${{ if eq(resource.type, 'keyVault') }}:
+        - template: ../cloud/azure/resourceGroup/keyVault-build-jobs.yml
+          parameters:
+            settings: ${{ parameters.settings }}
+            resource: ${{ resource }}

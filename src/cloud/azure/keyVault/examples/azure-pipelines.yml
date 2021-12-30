@@ -3,7 +3,10 @@ trigger:
     include:
     - main
     - feature/v0.1
-
+  paths:
+    include:
+      - src/cloud/azure/keyVault/*
+      
 pool:
   vmImage: 'windows-latest'
 
