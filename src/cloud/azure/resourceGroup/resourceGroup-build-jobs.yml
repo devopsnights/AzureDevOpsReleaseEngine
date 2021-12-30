@@ -1,8 +1,6 @@
 parameters:
   - name: settings
     type: object
-  - name: resource
-    type: object
 
 jobs:
   - job: BuildJob
@@ -17,5 +15,5 @@ jobs:
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: ${{ parameters.resource.type }}
+          artifact: resourceGroup
           publishLocation: 'pipeline'
