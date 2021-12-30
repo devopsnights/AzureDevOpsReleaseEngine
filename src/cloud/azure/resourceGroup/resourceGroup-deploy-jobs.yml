@@ -1,0 +1,34 @@
+parameters:
+- name: settings
+  type: object
+- name: environment
+  type: string
+
+
+jobs:
+  - deployment: resourceGroupDeploy
+    displayName: Azure Resource Group Deployment
+    environment: ${{ parameters.environment }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: Creating Resource Group '${{ parameters.settings.azure.resourceGroup.name }}' by IaC
+              inputs:
+                deploymentScope: 'Subscription'
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
+                action: 'Create Or Update Resource Group'
+                resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
+                location: ${{ parameters.settings.azure.resourceGroup.location }}
+                templateLocation: 'Linked artifact'
+                csmFile: '$(Pipeline.Workspace)/resourceGroup/infrastructure/resourceGroup.json'
+                overrideParameters: >
+                  -resourceGroupLocation ${{ parameters.settings.azure.resourceGroup.location }} 
+                  -resourceGroupName ${{ parameters.settings.azure.resourceGroup.name }} 
+                deploymentMode: 'Incremental'
+                deploymentOutputs: 'ArmOutputs'
+
+        

@@ -1,0 +1,35 @@
+parameters:
+  - name: settings
+    type: object
+  - name: resources
+    type: object
+
+variables:
+  - name: azureServiceConnection
+    value: ServiceConnection
+
+stages:
+
+  - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
+    - stage: build
+      
+      jobs:
+        
+        - template: ./_jobs/build-jobs.yml
+          parameters:
+            settings: ${{ parameters.settings }}
+            resources: ${{ parameters.resources }}
+
+  - ${{ if eq(parameters.settings.deploy.enabled, 'true') }}:
+    - ${{ each env in parameters.settings.environments }}:
+      - stage: ${{ env }}
+      
+        variables:
+          - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml
+
+        jobs:
+          - template: ./_jobs/deploy-jobs.yml
+            parameters:
+              settings: ${{ parameters.settings }}
+              resources: ${{ parameters.resources }}
+              environment: ${{ env }}

@@ -1,0 +1,16 @@
+parameters:
+  - name: bicepFilePath
+    type: string
+
+steps:
+  
+  - powershell: |
+      Write-Host "##[section]Building bicep file: $env:bicepFilePath"
+      $file = $env:bicepFilePath
+      New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/infrastructure
+      az bicep build --file $file --outdir $(build.artifactstagingdirectory)/infrastructure
+
+      Get-ChildItem $(build.artifactstagingdirectory)/infrastructure
+    displayName: 'Build bicep artifact' 
+    env:
+      bicepFilePath: ${{ parameters.bicepFilePath }}

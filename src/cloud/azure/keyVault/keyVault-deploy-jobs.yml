@@ -1,0 +1,35 @@
+parameters:
+- name: settings
+  type: object
+- name: resource
+  type: object  
+- name: environment
+  type: string
+
+
+jobs:
+  - deployment: 
+    displayName: Azure Key Vault Deployment
+    environment: ${{ parameters.environment }}
+    dependsOn: resourceGroupDeploy
+    
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: Creating Key Vault '${{ parameters.resource.name }}' by IaC
+              inputs:
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
+                action: 'Create Or Update Resource Group'
+                resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
+                location: ${{ parameters.settings.azure.resourceGroup.location }}
+                templateLocation: 'Linked artifact'
+                csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.type }}/infrastructure/${{ parameters.resource.type }}.json'
+                overrideParameters: >
+                  -keyVaultlocation ${{ parameters.settings.azure.resourceGroup.location }} 
+                  -keyVaultName ${{ parameters.resource.name }} 
+                deploymentMode: 'Incremental'
+                deploymentOutputs: 'ArmOutputs'
