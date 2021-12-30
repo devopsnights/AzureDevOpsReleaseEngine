@@ -30,6 +30,7 @@ extends:
       environments:
         - dev
         - uat
+        - prd
     resources:
       - name: $(resourceGroupName)
         type: resourceGroup

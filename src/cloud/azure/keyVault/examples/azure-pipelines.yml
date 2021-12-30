@@ -31,6 +31,7 @@ extends:
       environments:
         - dev
         - uat
+        - prd
     resources:
       - name: $(keyVaultName)
         type: keyVault
