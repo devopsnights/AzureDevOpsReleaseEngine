@@ -15,6 +15,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = {
       family: 'A'
       name: 'standard'
     }
+    accessPolicies: []
     enabledForDeployment: enabledForDeployment
     enabledForDiskEncryption: enabledForDiskEncryption
     enabledForTemplateDeployment: enabledForTemplateDeployment
