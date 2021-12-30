@@ -13,19 +13,17 @@ jobs:
       runOnce:
         deploy:
           steps:
-            # - task: DownloadPipelineArtifact@2 #downloading artifacts created in build stage
-            #   inputs:
-            #     source: 'current'
-            #     path: '$(Pipeline.Workspace)'
             
-            - powershell: |
-                Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
-                Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"
-                Write-Host "location: ${{ parameters.settings.azure.resourceGroup.location }}"
-                Write-Host "name: ${{ parameters.settings.azure.resourceGroup.name }}"
+            - ${{ if eq(variables['System.Debug'], 'true') }}:
+              - powershell: |
+                  Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
+                  Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"
+                  Write-Host "location: ${{ parameters.settings.azure.resourceGroup.location }}"
+                  Write-Host "name: ${{ parameters.settings.azure.resourceGroup.name }}"
 
-                Get-ChildItem -Path env:
-                Get-ChildItem $(Pipeline.Workspace)
+                  Get-ChildItem -Path env:
+                  Get-ChildItem $(Pipeline.Workspace)
+                displayName: Variables
 
             - task: AzureResourceManagerTemplateDeployment@3
               displayName: Creating Resource Group Infrastructure by IaC
