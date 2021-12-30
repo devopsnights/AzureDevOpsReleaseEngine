@@ -18,6 +18,7 @@ extends:
         enabled: true
       deploy:
         enabled: true
+        variablesDirectory: ./cloud/azure/keyVault/examples/variables
       azure:
         subscription:
           azureServiceConnection: $(azureServiceConnection)
