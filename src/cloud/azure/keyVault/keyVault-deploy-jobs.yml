@@ -11,7 +11,7 @@ jobs:
   - deployment: 
     displayName: Azure Key Vault Deployment
     environment: ${{ parameters.environment }}
-    # dependsOn: resourceGroupDeploy
+    dependsOn: resourceGroupDeploy
     
     strategy:
       runOnce:
