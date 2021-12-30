@@ -18,7 +18,7 @@ jobs:
         deploy:
           steps:
             
-            # - ${{ if eq(variables['System.Debug'], 'true') }}:
+            # - ${{ if eq(variables.System_Debug, 'true') }}:
             - powershell: |
                 Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
                 Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"

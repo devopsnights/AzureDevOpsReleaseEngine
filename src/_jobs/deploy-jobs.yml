@@ -16,9 +16,10 @@ jobs:
 
   - ${{ each resource in parameters.resources }}:
     - ${{ if eq(resource.enabled, 'true') }}:          
+      
       - ${{ if eq(resource.type, 'keyVault') }}:
         - template: ../cloud/azure/keyVault/keyVault-deploy-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
-            resource: ${{ parameters.resource }}
+            resource: ${{ resource }}
