@@ -4,7 +4,6 @@ parameters:
   - name: resources
     type: object
 
-
 jobs:
 
   # - ${{ if eq(parameters.settings.azure.resourceGroup.new, 'true') }}:
@@ -12,11 +11,12 @@ jobs:
   #     parameters:
   #       settings: ${{ parameters.settings }}        
   
-  - ${{ each resource in parameters.resources }}:
-      
-    - ${{ if eq(resource.enabled, 'true') }}:
-      - ${{ if eq(resource.type, 'keyVault') }}:
+  - ${{ each res in parameters.resources }}:  
+    
+
+    - ${{ if eq(res.enabled, 'true') }}:
+      - ${{ if eq(res.type, 'keyVault') }}:
         - template: ../cloud/azure/keyVault/keyVault-build-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}
-            resource: ${{ resource }}
+            resource: ${{ res }}
