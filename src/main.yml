@@ -25,6 +25,10 @@ stages:
       - stage: ${{ env }}
       
         variables:
+          
+          - ${{ if eq(parameters.settings.azure.resourceGroup.new, 'true') }}:
+            - template: ./cloud/azure/resourceGroup/examples/variables/${{ env }}-vars.yml
+
           - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml
 
         jobs:
