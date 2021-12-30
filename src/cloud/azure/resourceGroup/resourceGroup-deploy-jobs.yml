@@ -22,6 +22,7 @@ jobs:
                 Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
                 Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"
                 Write-Host "location: ${{ parameters.settings.azure.resourceGroup.location }}"
+                Write-Host "name: ${{ parameters.settings.azure.resourceGroup.name }}"
 
                 Get-ChildItem -Path env:
                 Get-ChildItem $(Pipeline.Workspace)
