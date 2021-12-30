@@ -25,7 +25,8 @@ stages:
       - stage: ${{ env }}
       
         variables:
-          - template: ./cloud/azure/resourceGroup/examples/variables/${{ env }}-vars.yml
+          # - template: ./cloud/azure/resourceGroup/examples/variables/${{ env }}-vars.yml
+          - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml
 
         jobs:
           - template: ./_jobs/deploy-jobs.yml
