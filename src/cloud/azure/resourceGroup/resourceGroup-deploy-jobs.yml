@@ -6,8 +6,8 @@ parameters:
 
 
 jobs:
-  - deployment: 
-    displayName: Azure Resource Group Deployment
+  - deployment: resourceGroupDeploy
+    # displayName: Azure Resource Group Deployment
     environment: ${{ parameters.environment }}
     strategy:
       runOnce:
