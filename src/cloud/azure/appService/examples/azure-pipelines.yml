@@ -2,7 +2,7 @@ trigger:
   branches:
     include:
     - main
-    - feature/v0.1
+    - feature/appService
   paths:
     include:
       - src/cloud/azure/appService/*
