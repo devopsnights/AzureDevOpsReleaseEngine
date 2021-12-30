@@ -9,7 +9,7 @@ parameters:
 
 jobs:
   - deployment: 
-    displayName: Azure Web App Deployment
+    displayName: Azure Key Vault Deployment
     environment: ${{ parameters.environment }}
     strategy:
       runOnce:
