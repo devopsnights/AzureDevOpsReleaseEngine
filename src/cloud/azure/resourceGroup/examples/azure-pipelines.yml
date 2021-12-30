@@ -23,7 +23,7 @@ extends:
         - dev
         - uat
     resources:
-      - name: RG-example
+      - name: $(resourceGroupName)
         type: resourceGroup
         enabled: true
         infrastructure:
