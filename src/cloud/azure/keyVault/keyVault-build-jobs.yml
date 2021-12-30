@@ -14,5 +14,5 @@ jobs:
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: resourceGroup
+          artifact: keyVault
           publishLocation: 'pipeline'
