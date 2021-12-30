@@ -3,8 +3,8 @@ parameters:
     type: object
 
 jobs:
-  - job: BuildJob
-    displayName: Build Job
+  - job: keyVaultBuildJob
+    displayName: Key Vault Build Job
     steps:
 
       - template: ../bicep/bicep-build-tasks.yml

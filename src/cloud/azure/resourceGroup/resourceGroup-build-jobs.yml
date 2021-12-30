@@ -3,8 +3,8 @@ parameters:
     type: object
 
 jobs:
-  - job: BuildJob
-    displayName: Build Job
+  - job: resourceGroupBuildJob
+    displayName: Resource Group Build Job
     steps:
 
       - template: ../bicep/bicep-build-tasks.yml
