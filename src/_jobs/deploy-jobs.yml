@@ -13,6 +13,5 @@ jobs:
           - ${{ if eq(resource.type, 'resourceGroup') }}:
               - template: ../cloud/azure/resourceGroup/resourceGroup-deploy-jobs.yml
                 parameters:
-                  settings: ${{ parameters.settings }}
-                  resource: ${{ resource }}
+                  settings: ${{ parameters.settings }}                  
                   environment: ${{ parameters.environment }}
