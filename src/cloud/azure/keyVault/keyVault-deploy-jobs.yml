@@ -31,9 +31,8 @@ jobs:
                 displayName: Variables
 
             - task: AzureResourceManagerTemplateDeployment@3
-              displayName: Creating Resource Group Infrastructure by IaC
+              displayName: Creating Key Vault Infrastructure by IaC
               inputs:
-                deploymentScope: 'Subscription'
                 azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
                 subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
                 action: 'Create Or Update Resource Group'
