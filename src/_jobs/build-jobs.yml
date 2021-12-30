@@ -12,7 +12,6 @@ jobs:
       parameters:
         settings: ${{ parameters.settings }}        
   
-  # call build template for each resource
   - ${{ each resource in parameters.resources }}:
     
     - ${{ if eq(resource.enabled, 'true') }}:
