@@ -12,9 +12,9 @@ jobs:
         settings: ${{ parameters.settings }}        
   
   - ${{ each resource in parameters.resources }}:  
-    
 
     - ${{ if eq(resource.enabled, 'true') }}:
+
       - ${{ if eq(resource.type, 'keyVault') }}:
         - template: ../cloud/azure/keyVault/keyVault-build-jobs.yml
           parameters:
