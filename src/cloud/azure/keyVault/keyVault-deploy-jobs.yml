@@ -31,7 +31,7 @@ jobs:
                 displayName: Variables
 
             - task: AzureResourceManagerTemplateDeployment@3
-              displayName: Creating Key Vault Infrastructure by IaC
+              displayName: Creating Key Vault '${{ parameters.resource.name }}' by IaC
               inputs:
                 azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
                 subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
