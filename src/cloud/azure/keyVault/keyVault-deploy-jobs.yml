@@ -18,18 +18,6 @@ jobs:
         deploy:
           steps:
             
-            - ${{ if eq(variables.System_Debug, 'true') }}:
-              - powershell: |
-                  Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
-                  Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"
-                  Write-Host "Location: ${{ parameters.settings.azure.resourceGroup.location }}"
-                  Write-Host "Name: ${{ parameters.settings.azure.resourceGroup.name }}"
-                  Write-Host "Resource type: ${{ parameters.resource.type }}"
-
-                  Get-ChildItem -Path env:
-                  Get-ChildItem $(Pipeline.Workspace) -Recurse
-                displayName: Variables
-
             - task: AzureResourceManagerTemplateDeployment@3
               displayName: Creating Key Vault '${{ parameters.resource.name }}' by IaC
               inputs:
