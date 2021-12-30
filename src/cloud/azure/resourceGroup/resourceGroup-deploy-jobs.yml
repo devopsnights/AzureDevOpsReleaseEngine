@@ -28,21 +28,21 @@ jobs:
                 Get-ChildItem -Path env:
                 Get-ChildItem $(Pipeline.Workspace)
 
-            # - task: AzureResourceManagerTemplateDeployment@3
-            #   displayName: Creating Resource Group Infrastructure by IaC
-            #   inputs:
-            #     deploymentScope: 'Subscription'
-            #     azureResourceManagerConnection: '${{ parameters.settings.azureServiceConnection }}'
-            #     subscriptionId: ${{ parameters.settings.subscriptionId }}
-            #     action: 'Create Or Update Resource Group'
-            #     resourceGroupName: ${{ parameters.resource.name }}
-            #     location: ${{ parameters.settings.location }}
-            #     templateLocation: 'Linked artifact'
-            #     csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.type }}/infrastructure/azure-resourceGroup.json'
-            #     overrideParameters: >
-            #       -resourceGroupLocation ${{ parameters.resource.deployment.infrastructure.resourceGroupLocation }} 
-            #       -resourceGroupName ${{ parameters.resource.deployment.name }} 
-            #     deploymentMode: 'Incremental'
-            #     deploymentOutputs: 'ArmOutputs'
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: Creating Resource Group Infrastructure by IaC
+              inputs:
+                deploymentScope: 'Subscription'
+                azureResourceManagerConnection: '${{ parameters.settings.azureServiceConnection }}'
+                subscriptionId: ${{ parameters.settings.subscriptionId }}
+                action: 'Create Or Update Resource Group'
+                resourceGroupName: ${{ parameters.resource.name }}
+                location: ${{ parameters.settings.location }}
+                templateLocation: 'Linked artifact'
+                csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.type }}/infrastructure/resourceGroup.json'
+                overrideParameters: >
+                  -resourceGroupLocation ${{ parameters.resource.deployment.infrastructure.location }} 
+                  -resourceGroupName ${{ parameters.resource.name }} 
+                deploymentMode: 'Incremental'
+                deploymentOutputs: 'ArmOutputs'
 
         

@@ -18,7 +18,7 @@ extends:
         enabled: true
       azureServiceConnection: $(azureServiceConnection)
       subscriptionId: $(subscriptionId)
-      location: $(newVar)
+      location: $(location)
       environments:
         - dev
         - uat
@@ -26,4 +26,6 @@ extends:
       - name: RG-example
         type: resourceGroup
         enabled: true
+        infrastructure:
+          location: $(location)
         
