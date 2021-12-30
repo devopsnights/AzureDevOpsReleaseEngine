@@ -16,9 +16,14 @@ extends:
         enabled: true
       deploy:
         enabled: true
-      azureServiceConnection: $(azureServiceConnection)
-      subscriptionId: $(subscriptionId)
-      location: $(location)
+      azure:
+        subscription:
+          azureServiceConnection: $(azureServiceConnection)
+          subscriptionId: $(subscriptionId)
+        resourceGroup:
+          name: $(resourceGroupName)
+          location: $(location)
+          new: true
       environments:
         - dev
         - uat

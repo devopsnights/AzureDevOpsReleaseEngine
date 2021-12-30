@@ -21,9 +21,9 @@ jobs:
             #     path: '$(Pipeline.Workspace)'
             
             - powershell: |
-                Write-Host "Service Connection: ${{ parameters.settings.azureServiceConnection }}"
-                Write-Host "subscriptionId: ${{ parameters.settings.subscriptionId }}"
-                Write-Host "location: ${{ parameters.settings.location }}"
+                Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
+                Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"
+                Write-Host "location: ${{ parameters.settings.azure.resourceGroup.location }}"
 
                 Get-ChildItem -Path env:
                 Get-ChildItem $(Pipeline.Workspace)
@@ -32,11 +32,11 @@ jobs:
               displayName: Creating Resource Group Infrastructure by IaC
               inputs:
                 deploymentScope: 'Subscription'
-                azureResourceManagerConnection: '${{ parameters.settings.azureServiceConnection }}'
-                subscriptionId: ${{ parameters.settings.subscriptionId }}
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
                 action: 'Create Or Update Resource Group'
                 resourceGroupName: ${{ parameters.resource.name }}
-                location: ${{ parameters.settings.location }}
+                location: ${{ parameters.settings.azure.resourceGroup.location }}
                 templateLocation: 'Linked artifact'
                 csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.type }}/infrastructure/resourceGroup.json'
                 overrideParameters: >
