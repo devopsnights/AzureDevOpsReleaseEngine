@@ -1,0 +1,45 @@
+parameters:
+- name: settings
+  type: object
+- name: resource
+  type: object  
+- name: environment
+  type: string
+
+
+jobs:
+  - deployment: 
+    displayName: Azure Web App Deployment
+    environment: ${{ parameters.environment }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            
+            - ${{ if eq(variables['System.Debug'], 'true') }}:
+              - powershell: |
+                  Write-Host "Service Connection: ${{ parameters.settings.azure.subscription.azureServiceConnection }}"
+                  Write-Host "subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}"
+                  Write-Host "location: ${{ parameters.settings.azure.resourceGroup.location }}"
+                  Write-Host "name: ${{ parameters.settings.azure.resourceGroup.name }}"
+
+                  Get-ChildItem -Path env:
+                  Get-ChildItem $(Pipeline.Workspace)
+                displayName: Variables
+
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: Creating Resource Group Infrastructure by IaC
+              inputs:
+                deploymentScope: 'Subscription'
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
+                action: 'Create Or Update Resource Group'
+                resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
+                location: ${{ parameters.settings.azure.resourceGroup.location }}
+                templateLocation: 'Linked artifact'
+                csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.type }}/infrastructure/${{ parameters.resource.type }}.json'
+                overrideParameters: >
+                  -keyVaultlocation ${{ parameters.settings.azure.resourceGroup.location }} 
+                  -keyVaultName ${{ parameters.resource.name }} 
+                deploymentMode: 'Incremental'
+                deploymentOutputs: 'ArmOutputs'

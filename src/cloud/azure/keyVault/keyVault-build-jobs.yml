@@ -1,0 +1,18 @@
+parameters:
+  - name: settings
+    type: object
+
+jobs:
+  - job: BuildJob
+    displayName: Build Job
+    steps:
+
+      - template: ../bicep/bicep-build-tasks.yml
+        parameters:
+          bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/keyVault/keyVault.bicep
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(build.artifactstagingdirectory)'
+          artifact: resourceGroup
+          publishLocation: 'pipeline'

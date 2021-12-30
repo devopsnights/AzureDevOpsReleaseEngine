@@ -1,0 +1,36 @@
+trigger:
+  branches:
+    include:
+    - main
+    - feature/v0.1
+
+pool:
+  vmImage: 'windows-latest'
+
+
+extends: 
+  template: ../../../../main.yml
+  parameters:
+    settings:
+      build:
+        enabled: true
+      deploy:
+        enabled: true
+      azure:
+        subscription:
+          azureServiceConnection: $(azureServiceConnection)
+          subscriptionId: $(subscriptionId)
+        resourceGroup:
+          name: $(resourceGroupName)
+          location: $(location)
+          new: true
+      environments:
+        - dev
+        - uat
+    resources:
+      - name: $(keyVaultName)
+        type: keyVault
+        enabled: true
+        # infrastructure:
+        #   location: $(location)
+        

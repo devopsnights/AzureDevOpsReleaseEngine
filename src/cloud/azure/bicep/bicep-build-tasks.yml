@@ -1,6 +1,4 @@
 parameters:
-  - name: azureServiceConnection
-    type: string
   - name: bicepFilePath
     type: string
 
