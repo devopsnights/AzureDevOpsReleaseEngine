@@ -11,7 +11,7 @@ jobs:
       parameters:
         resource: ${{ parameters.resource }}
   
-  - job: dotnetCoreBuildJob
+  - job:
     displayName: dotnet Core Build Job
     variables:
       BuildPlatform: 'Any CPU'
