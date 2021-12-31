@@ -2,7 +2,7 @@ trigger:
   branches:
     include:
     - main
-    - feature/v0.1
+    - feature/*
   paths:
     include:
       - src/development/dotnetCore/*

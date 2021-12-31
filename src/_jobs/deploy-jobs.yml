@@ -32,7 +32,7 @@ jobs:
             resource: ${{ resource }}
 
       - ${{ if eq(resource.type, 'dotnetCore') }}:
-        - template: ../cloud/azure/dotnetCore/dotnetCore-deploy-jobs.yml
+        - template: ../development/dotnetCore/dotnetCore-deploy-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
