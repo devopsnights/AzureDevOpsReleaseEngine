@@ -45,7 +45,7 @@ jobs:
           #     resourceType: appService
           - template: ../../cloud/azure/appService/appService-build-jobs.yml
             parameters:
-              resource: ${{ resource }}
+              resource: ${{ parameters.resource }}
 
       - task: PublishPipelineArtifact@1
         inputs:
