@@ -40,7 +40,7 @@ jobs:
           zipAfterPublish: True
 
       - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
-          - template: ../../cloud/azure/bicep/azure-bicep-build-tasks.yml
+          - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
             parameters:
               resource: ${{ parameters.resource }}
 
