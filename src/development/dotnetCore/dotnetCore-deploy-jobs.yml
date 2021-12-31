@@ -10,7 +10,7 @@ jobs:
 
   
   - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
-      - template: ../../cloud/azure/appservice/appservice-deploy-jobs.yml
+      - template: ../../cloud/azure/appService/appService-deploy-jobs.yml
         parameters:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
