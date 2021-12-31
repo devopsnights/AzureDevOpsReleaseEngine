@@ -8,7 +8,7 @@ parameters:
 
 
 jobs:
-  - deployment: 
+  - deployment: appServiceDeployJob
     displayName: Azure App Service Deployment
     environment: ${{ parameters.environment }}
     dependsOn: resourceGroupDeploy
