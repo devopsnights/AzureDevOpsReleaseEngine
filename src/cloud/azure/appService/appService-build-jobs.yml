@@ -2,7 +2,7 @@ parameters:
   - name: resource
     type: object
 jobs:
-  - job: appServiceBuildJob$(Environment.ResourceId)
+  - job: appServiceBuildJob${{ replace(parameters.resource.name,'-','') }}
     displayName: Azure App Service Build Job
     steps:
 
