@@ -15,3 +15,18 @@ jobs:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
             resource: ${{ parameters.resource }}
+
+      - deployment: 
+        displayName: Azure dotnet Core Deployment
+        environment: ${{ parameters.environment }}
+        dependsOn: appServiceDeployJob
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
+                    appName: ${{ parameters.resource.name }}
+                    package: $(Pipeline.Workspace)/**/*.zip
