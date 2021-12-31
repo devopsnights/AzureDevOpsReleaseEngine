@@ -2,7 +2,7 @@ parameters:
   - name: resource
     type: object
 jobs:
-  - job: appServiceBuildJob
+  - job: appServiceBuildJob$(Environment.ResourceId)
     displayName: Azure App Service Build Job
     steps:
 
