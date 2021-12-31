@@ -24,3 +24,8 @@ jobs:
         - template: ../cloud/azure/appService/appService-build-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}            
+
+      - ${{ if eq(resource.type, 'dotnetCore') }}:
+        - template: ../cloud/azure/dotnetCore/dotnetCore-build-jobs.yml
+          parameters:
+            settings: ${{ parameters.settings }}    

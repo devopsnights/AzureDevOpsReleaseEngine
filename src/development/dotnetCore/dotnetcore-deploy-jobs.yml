@@ -1,0 +1,17 @@
+parameters:
+  - name: settings
+    type: object
+  - name: resource
+    type: object
+  - name: environment
+    type: string
+
+jobs:
+
+  
+  - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
+      - template: ../cloud/azure/appservice/appservice-deploy-jobs.yml
+        parameters:
+            settings: ${{ parameters.settings }}                  
+            environment: ${{ parameters.environment }}
+            resource: ${{ resource }}
