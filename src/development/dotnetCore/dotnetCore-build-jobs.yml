@@ -12,7 +12,7 @@ jobs:
         resource: ${{ parameters.resource }}
   
   - job:
-    displayName: ${{ parameters.resource.alias }} Build Job
+    displayName: App - ${{ parameters.resource.alias }} Build Job
     variables:
       BuildPlatform: 'Any CPU'
       BuildConfiguration: 'Release'
