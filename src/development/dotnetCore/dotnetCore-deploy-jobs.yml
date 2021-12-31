@@ -28,4 +28,4 @@ jobs:
                   inputs:
                     azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
                     appName: ${{ parameters.resource.name }}
-                    package: $(Pipeline.Workspace)/**/*.zip
+                    package: $(Pipeline.Workspace)/${{ parameters.resource.alias }}/**/*.zip
