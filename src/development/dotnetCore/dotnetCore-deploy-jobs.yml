@@ -19,7 +19,6 @@ jobs:
       - deployment: 
         displayName: Azure dotnet Core Deployment
         environment: ${{ parameters.environment }}
-        dependsOn: appServiceDeployJob
         strategy:
           runOnce:
             deploy:
