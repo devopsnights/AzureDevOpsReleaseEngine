@@ -35,7 +35,7 @@ jobs:
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
       
-            - ${{ if ne(resource.type, 'appService') }}:
+            - ${{ if ne( parameters.resource.type, 'appService') }}:
               - task: AzureWebApp@1
                 inputs:
                   azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
