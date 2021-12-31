@@ -40,9 +40,12 @@ jobs:
           zipAfterPublish: True
 
       - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
-          - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
+          # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
+          #   parameters:
+          #     resourceType: appService
+          - template: ../../cloud/azure/appService/appService-build-jobs.yml
             parameters:
-              resourceType: appService
+              resource: ${{ resource }}
 
       - task: PublishPipelineArtifact@1
         inputs:
