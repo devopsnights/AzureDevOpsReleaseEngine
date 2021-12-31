@@ -2,9 +2,11 @@ parameters:
   - name: resource
     type: object
 jobs:
-  - job: appServiceBuildJob${{ replace(parameters.resource.name,'-','') }}
+  - job: appServiceBuildJob
     displayName: Azure App Service Build Job
     steps:
+      - powershell: |
+          Get-ChildItem -Path env:
 
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
