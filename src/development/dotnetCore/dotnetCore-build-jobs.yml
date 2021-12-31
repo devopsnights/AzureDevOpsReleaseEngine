@@ -11,11 +11,11 @@ jobs:
       parameters:
         resource: ${{ parameters.resource }}
   
-  - job: BuildJob
+  - job: dotnetCoreBuildJob
+    displayName: DotNet Core Build Job
     variables:
       BuildPlatform: 'Any CPU'
       BuildConfiguration: 'Release'
-    displayName: Build Job
     steps:
 
       - task: DotNetCoreCLI@2

@@ -8,7 +8,7 @@ jobs:
 
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
-          resourceType: ${{ parameters.resource.type }}
+          resourceType: appService
 
       - task: PublishPipelineArtifact@1
         inputs:
