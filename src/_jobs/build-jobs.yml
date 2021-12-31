@@ -28,6 +28,6 @@ jobs:
       - ${{ if eq(resource.type, 'dotnetCore') }}:
         - template: ../development/dotnetCore/dotnetCore-build-jobs.yml
           parameters:
-            settings: ${{ parameters.settings }}
+            settings: ${{ resource }}
 
             
