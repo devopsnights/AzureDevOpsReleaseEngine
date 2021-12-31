@@ -43,3 +43,10 @@ extends:
           infrastructure:
             servicePlanName: $(servicePlanName)
         
+      - name: $(applicationName)2
+        type: dotnetCore
+        enabled: true
+        deployment:
+          type: azureWebApp
+          infrastructure:
+            servicePlanName: $(servicePlanName)
