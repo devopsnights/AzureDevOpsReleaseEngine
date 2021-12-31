@@ -14,4 +14,4 @@ jobs:
         parameters:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
-            resource: ${{ resource }}
+            resource: ${{ parameters.resource }}
