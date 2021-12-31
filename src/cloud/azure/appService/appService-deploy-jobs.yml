@@ -9,7 +9,7 @@ parameters:
 
 jobs:
   - deployment: 
-    displayName: Azure Key Vault Deployment
+    displayName: Azure App Service Deployment
     environment: ${{ parameters.environment }}
     dependsOn: resourceGroupDeploy
     
@@ -27,7 +27,7 @@ jobs:
                 resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                 location: ${{ parameters.settings.azure.resourceGroup.location }}
                 templateLocation: 'Linked artifact'
-                csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.type }}/infrastructure/${{ parameters.resource.type }}.json'
+                csmFile: '$(Pipeline.Workspace)/appService/infrastructure/appService.json'
                 overrideParameters: >
                   -servicePlanName ${{ parameters.resource.deployment.infrastructure.servicePlanName }} 
                   -siteName ${{ parameters.resource.name }} 
