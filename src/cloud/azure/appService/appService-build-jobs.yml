@@ -1,7 +1,6 @@
 parameters:
-  - name: settings
+  - name: resource
     type: object
-
 jobs:
   - job: appServiceBuildJob
     displayName: Azure App Service Build Job
