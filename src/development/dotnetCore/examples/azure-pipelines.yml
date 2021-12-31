@@ -5,7 +5,8 @@ trigger:
     - feature/v0.1
   paths:
     include:
-      - src/cloud/azure/keyVault/*
+      - src/development/dotnetCore/*
+      
       
 pool:
   # vmImage: 'windows-latest'
