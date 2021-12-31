@@ -4,7 +4,7 @@ parameters:
 
 jobs:
   - job: resourceGroupBuildJob
-    displayName: Resource Group Build Job
+    displayName: IaC - Resource Group Build Job
     steps:
 
       - template: ../bicep/bicep-build-tasks.yml

@@ -8,8 +8,8 @@ trigger:
       - src/cloud/azure/appService/*
       
 pool:
-  # vmImage: 'windows-latest'
-  name: default
+  vmImage: 'windows-latest'
+  # name: default
 
 extends: 
   template: ../../../../main.yml
