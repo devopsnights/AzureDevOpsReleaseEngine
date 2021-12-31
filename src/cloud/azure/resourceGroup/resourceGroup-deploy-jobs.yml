@@ -18,7 +18,7 @@ jobs:
               displayName: Creating Resource Group '${{ parameters.settings.azure.resourceGroup.name }}' by IaC
               inputs:
                 deploymentScope: 'Subscription'
-                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                 subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
                 action: 'Create Or Update Resource Group'
                 resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}

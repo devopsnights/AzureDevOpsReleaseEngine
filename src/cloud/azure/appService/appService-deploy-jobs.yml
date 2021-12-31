@@ -21,7 +21,7 @@ jobs:
             - task: AzureResourceManagerTemplateDeployment@3
               displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
               inputs:
-                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                 subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
                 action: 'Create Or Update Resource Group'
                 resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}

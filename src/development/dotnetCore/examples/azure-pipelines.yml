@@ -24,7 +24,7 @@ extends:
         
       azure:
         subscription:
-          serviceConnection: $(azureServiceConnection)
+          serviceConnection: $(serviceConnection)
           subscriptionId: $(subscriptionId)
         resourceGroup:
           name: $(resourceGroupName)

@@ -5,7 +5,7 @@ parameters:
     type: object
 
 variables:
-  - name: azureServiceConnection
+  - name: serviceConnection
     value: ServiceConnection
 
 stages:

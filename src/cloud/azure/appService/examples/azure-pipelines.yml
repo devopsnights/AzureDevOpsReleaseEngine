@@ -22,7 +22,7 @@ extends:
         variablesDirectory: ./cloud/azure/appService/examples/variables
       azure:
         subscription:
-          azureServiceConnection: $(azureServiceConnection)
+          serviceConnection: $(serviceConnection)
           subscriptionId: $(subscriptionId)
         resourceGroup:
           name: $(resourceGroupName)

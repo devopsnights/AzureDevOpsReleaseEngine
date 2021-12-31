@@ -21,7 +21,7 @@ extends:
         variablesDirectory: ./cloud/azure/keyVault/examples/variables
       azure:
         subscription:
-          azureServiceConnection: $(azureServiceConnection)
+          serviceConnection: $(serviceConnection)
           subscriptionId: $(subscriptionId)
         resourceGroup:
           name: $(resourceGroupName)
