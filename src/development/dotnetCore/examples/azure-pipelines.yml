@@ -37,14 +37,16 @@ extends:
     resources:
       - name: $(applicationName)
         type: dotnetCore
+        alias: app-releaseengine
         enabled: true
         deployment:
           type: azureWebApp
           infrastructure:
             servicePlanName: $(servicePlanName)
         
-      - name: $(applicationName)2
+      - name: $(applicationName)
         type: dotnetCore
+        alias: app-releaseengine2
         enabled: true
         deployment:
           type: azureWebApp
