@@ -1,6 +1,6 @@
 parameters:
-  - name: bicepFilePath
-    type: string
+  - name: resource
+    type: object
 
 steps:
   
@@ -13,4 +13,6 @@ steps:
       Get-ChildItem $(build.artifactstagingdirectory)/infrastructure
     displayName: 'Build bicep artifact' 
     env:
-      bicepFilePath: ${{ parameters.bicepFilePath }}
+      bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/${{ parameters.resource.type }}/${{ parameters.resource.type }}.bicep
+
+      

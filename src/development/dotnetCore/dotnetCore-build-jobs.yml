@@ -42,7 +42,7 @@ jobs:
       - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
           - template: ../cloud/azure/bicep/azure-bicep-build-tasks.yml
             parameters:
-              bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/appService/appService.bicep
+              resource: ${{ parameters.resource }}
 
       - task: PublishPipelineArtifact@1
         inputs:
