@@ -42,7 +42,7 @@ jobs:
       - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
           - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
             parameters:
-              resourceType: ${{ parameters.resource.type }}
+              resourceType: appService
 
       - task: PublishPipelineArtifact@1
         inputs:
