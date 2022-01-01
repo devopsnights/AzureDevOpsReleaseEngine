@@ -42,20 +42,20 @@ extends:
         type: dotnetCore
         alias: app-releaseengine
         enabled: true
-        deploy:
+        deployment:
           type: azureWebApp
           infrastructure:
             servicePlanName: $(servicePlanName)
           application:
             enabled: true
 
-      # - name: $(applicationName)
-      #   type: dotnetCore
-      #   alias: app-releaseengine2
-      #   enabled: true
-      #   deploy:
-      #     type: azureWebApp
-      #     infrastructure:
-      #       servicePlanName: $(servicePlanName)
-      #     application:
-      #       enabled: true
+      - name: $(applicationName)
+        type: dotnetCore
+        alias: app-releaseengine2
+        enabled: true
+        deployment:
+          type: azureWebApp
+          infrastructure:
+            servicePlanName: $(servicePlanName)
+          application:
+            enabled: true
