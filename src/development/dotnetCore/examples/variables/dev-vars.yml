@@ -4,5 +4,7 @@ variables:
   location: northeurope
   resourceGroupName: rg-dotnetcore-releaseengine-dev
 
-  applicationName: app-dotnetcore-releaseengine-dev  
   servicePlanName: plan-dotnetcore-releaseengine-dev
+  applicationName: app-dotnetcore-releaseengine-dev 
+  applicationName2: app-dotnetcore2-releaseengine-dev
+  
