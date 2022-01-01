@@ -40,7 +40,7 @@ extends:
       - name: $(appServiceName)
         type: appService
         enabled: true
-        deployment:
+        deploy:
           infrastructure:
             enabled: true
             servicePlanName: $(servicePlanName)
