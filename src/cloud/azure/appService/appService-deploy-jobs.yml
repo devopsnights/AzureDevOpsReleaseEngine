@@ -16,7 +16,7 @@ jobs:
     strategy:
       runOnce:
 
-        ${{ if eq(parameters.settings.deploy.infrastructure.enabled, 'true') }}:
+        # ${{ if eq(parameters.settings.deploy.infrastructure.enabled, 'true') }}:
           # ${{ if eq(parameters.settings.deploy.application.enabled, 'true') }}:
           # ${{ if eq(parameters.resource.deploy.application.enabled, 'true') }}:
           #   preDeploy:
