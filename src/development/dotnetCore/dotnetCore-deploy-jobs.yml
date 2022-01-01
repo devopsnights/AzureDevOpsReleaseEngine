@@ -8,7 +8,11 @@ parameters:
 
 jobs:
 
-  
+  - job:
+    steps:
+      - powershell: |
+          Write-Host "application: ${{ parameters.resource.deploy.application.enabled }}"
+
   - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
       - template: ../../cloud/azure/appService/appService-deploy-jobs.yml
         parameters:
