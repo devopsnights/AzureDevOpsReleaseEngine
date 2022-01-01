@@ -21,7 +21,10 @@ extends:
       deploy:
         enabled: true
         variablesDirectory: ./development/dotnetCore/examples/variables
-        
+        infrastructure:
+          enabled: true
+        application:
+          enabled: true
       azure:
         subscription:
           serviceConnection: $(serviceConnection)
@@ -45,7 +48,7 @@ extends:
             servicePlanName: $(servicePlanName)
           application:
             enabled: true
-                    
+
       - name: $(applicationName)
         type: dotnetCore
         alias: app-releaseengine2

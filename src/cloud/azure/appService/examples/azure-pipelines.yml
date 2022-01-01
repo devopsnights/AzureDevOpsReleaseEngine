@@ -20,6 +20,10 @@ extends:
       deploy:
         enabled: true
         variablesDirectory: ./cloud/azure/appService/examples/variables
+        infrastructure:
+          enabled: true
+        application:
+          enabled: true
       azure:
         subscription:
           serviceConnection: $(serviceConnection)
