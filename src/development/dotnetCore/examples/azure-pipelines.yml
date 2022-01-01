@@ -42,7 +42,7 @@ extends:
         type: dotnetCore
         alias: app-releaseengine
         enabled: true
-        deployment:
+        deploy:
           type: azureWebApp
           infrastructure:
             servicePlanName: $(servicePlanName)
@@ -53,7 +53,7 @@ extends:
         type: dotnetCore
         alias: app-releaseengine2
         enabled: true
-        deployment:
+        deploy:
           type: azureWebApp
           infrastructure:
             servicePlanName: $(servicePlanName)
