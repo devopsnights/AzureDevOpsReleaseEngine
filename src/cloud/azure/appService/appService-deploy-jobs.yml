@@ -15,10 +15,10 @@ jobs:
     
     strategy:
       runOnce:
-        deploy:
-          steps:
-            
-            - ${{ if ne(parameters.settings.infrastructure.enabled, 'true') }}:
+
+        ${{ if ne(parameters.settings.infrastructure.enabled, 'true') }}:
+          preDeploy:
+            steps:
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                 inputs:
@@ -34,6 +34,9 @@ jobs:
                     -siteName ${{ parameters.resource.name }} 
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
+
+        deploy:
+          steps:
       
             - ${{ if ne( parameters.resource.type, 'appService') }}:
               - task: AzureWebApp@1
