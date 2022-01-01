@@ -17,9 +17,11 @@ jobs:
     strategy:
       runOnce:
 
+        # check if there is app and infrastructure deploy
+        # if there is infra only, the job must be preDeploy instead of deploy
         ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-          # ${{ if eq(parameters.settings.deploy.application.enabled, 'true') }}:
-          ${{ if eq(parameters.resource.deploy.application.enabled, 'true') }}:
+
+          ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
             preDeploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
