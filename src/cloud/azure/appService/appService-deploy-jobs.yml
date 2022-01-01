@@ -8,6 +8,11 @@ parameters:
 
 
 jobs:
+  - job:
+    steps:
+      - powershell: |
+          Write-Host "application: ${{ parameters.resource.deploy.application.enabled }}"
+  
   - deployment:
     displayName: Azure App Service Deployment
     environment: ${{ parameters.environment }}
@@ -22,7 +27,7 @@ jobs:
             preDeploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
-                  displayName: Pre ${{ parameters.resource.deployment.application.enabled }} Creating App Service '${{ parameters.resource.name }}' by IaC
+                  displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                   inputs:
                     azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                     subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
@@ -41,7 +46,7 @@ jobs:
             deploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
-                  displayName: Deploy ${{ parameters.resource.deployment.application.enabled }} Creating App Service '${{ parameters.resource.name }}' by IaC
+                  displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                   inputs:
                     azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                     subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
