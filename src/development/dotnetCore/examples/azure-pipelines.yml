@@ -22,9 +22,9 @@ extends:
         enabled: true
         variablesDirectory: ./development/dotnetCore/examples/variables
         infrastructure:
-          enabled: false
-        application:
           enabled: true
+        application:
+          enabled: false
       azure:
         subscription:
           serviceConnection: $(serviceConnection)
