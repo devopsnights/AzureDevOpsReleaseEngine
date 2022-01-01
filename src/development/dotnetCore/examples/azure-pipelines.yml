@@ -42,7 +42,7 @@ extends:
         type: dotnetCore
         alias: app-releaseengine
         enabled: true
-        deploy:
+        deployment:
           type: azureWebApp
           infrastructure:
             servicePlanName: $(servicePlanName)

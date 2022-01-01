@@ -22,7 +22,7 @@ jobs:
             preDeploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
-                  displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
+                  displayName: Pre ${{ parameters.resource.deployment.application.enabled }} Creating App Service '${{ parameters.resource.name }}' by IaC
                   inputs:
                     azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                     subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
@@ -41,7 +41,7 @@ jobs:
             deploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
-                  displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
+                  displayName: Deploy ${{ parameters.resource.deployment.application.enabled }} Creating App Service '${{ parameters.resource.name }}' by IaC
                   inputs:
                     azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                     subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
