@@ -56,13 +56,13 @@ jobs:
                     deploymentOutputs: 'ArmOutputs'
 
         ${{ if eq(parameters.settings.deploy.application.enabled, 'true') }}:          
-          ${{ if eq(parameters.resource.deployment.application.enabled, 'true') }}:
-            deploy:
-              steps:
-          
-                - ${{ if ne( parameters.resource.type, 'appService') }}:
-                  - task: AzureWebApp@1
-                    inputs:
-                      azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
-                      appName: ${{ parameters.resource.name }}
-                      package: $(Pipeline.Workspace)/${{ parameters.resource.alias }}/**/*.zip
+          # ${{ if eq(parameters.resource.deployment.application.enabled, 'true') }}:
+          deploy:
+            steps:
+        
+              - ${{ if ne( parameters.resource.type, 'appService') }}:
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
+                    appName: ${{ parameters.resource.name }}
+                    package: $(Pipeline.Workspace)/${{ parameters.resource.alias }}/**/*.zip
