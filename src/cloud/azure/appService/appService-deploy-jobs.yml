@@ -16,7 +16,7 @@ jobs:
     strategy:
       runOnce:
 
-        ${{ if eq(parameters.settings.infrastructure.enabled, 'true') }}:
+        ${{ if eq(parameters.settings.deploy.infrastructure.enabled, 'true') }}:
           ${{ if ne(parameters.resource.deployment.application.enabled, 'true') }}:
             deploy:
               steps:
@@ -55,7 +55,7 @@ jobs:
                     deploymentMode: 'Incremental'
                     deploymentOutputs: 'ArmOutputs'
 
-        ${{ if eq(parameters.settings.application.enabled, 'true') }}:          
+        ${{ if eq(parameters.settings.deploy.application.enabled, 'true') }}:          
           ${{ if eq(parameters.resource.deployment.application.enabled, 'true') }}:
             deploy:
               steps:
