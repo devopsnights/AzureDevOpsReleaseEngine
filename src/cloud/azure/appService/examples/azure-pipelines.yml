@@ -38,5 +38,7 @@ extends:
         enabled: true
         deployment:
           infrastructure:
+            enabled: true
             servicePlanName: $(servicePlanName)
-        
+          application:
+            enabled: false

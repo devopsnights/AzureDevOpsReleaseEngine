@@ -52,3 +52,5 @@ extends:
           type: azureWebApp
           infrastructure:
             servicePlanName: $(servicePlanName)
+          application:
+            enabled: true
