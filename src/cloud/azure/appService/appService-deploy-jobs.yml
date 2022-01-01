@@ -17,7 +17,7 @@ jobs:
       runOnce:
 
         # ${{ if eq(parameters.settings.infrastructure.enabled, 'true') }}:
-        ${{ if ne(parameters.settings.application.enabled, 'true') }}:
+        ${{ if ne(parameters.resource.application.enabled, 'true') }}:
           deploy:
             steps:
               - task: AzureResourceManagerTemplateDeployment@3
@@ -55,7 +55,7 @@ jobs:
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
         
-        ${{ if eq(parameters.settings.application.enabled, 'true') }}:
+        ${{ if eq(parameters.resource.application.enabled, 'true') }}:
           deploy:
             steps:
         
