@@ -17,8 +17,8 @@ jobs:
       runOnce:
 
         ${{ if eq(parameters.settings.deploy.infrastructure.enabled, 'true') }}:
-          ${{ if ne(parameters.resource.deployment.application.enabled, 'true') }}:
-            deploy:
+          ${{ if eq(parameters.resource.deployment.application.enabled, 'true') }}:
+            preDeploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
                   displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
@@ -37,7 +37,7 @@ jobs:
                     deploymentOutputs: 'ArmOutputs'
 
           ${{ else }}:
-            preDeploy:
+            deploy:
               steps:
                 - task: AzureResourceManagerTemplateDeployment@3
                   displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
