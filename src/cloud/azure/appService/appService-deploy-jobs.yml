@@ -8,10 +8,6 @@ parameters:
 
 
 jobs:
-  - job:
-    steps:
-      - powershell: |
-          Write-Host "application: ${{ parameters.resource.deploy.application.enabled }}"
   
   - deployment:
     displayName: Azure App Service Deployment

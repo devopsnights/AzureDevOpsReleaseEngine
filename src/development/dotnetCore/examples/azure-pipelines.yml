@@ -52,7 +52,7 @@ extends:
       - name: $(applicationName2)
         type: dotnetCore
         alias: app-releaseengine2
-        enabled: false
+        enabled: true
         deploy:
           type: azureWebApp
           infrastructure:
