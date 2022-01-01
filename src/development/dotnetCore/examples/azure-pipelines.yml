@@ -22,7 +22,7 @@ extends:
         enabled: true
         variablesDirectory: ./development/dotnetCore/examples/variables
         infrastructure:
-          enabled: true
+          enabled: false
         application:
           enabled: true
       azure:
