@@ -11,7 +11,7 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
-    - deployment: ${{ replace(parameters.resource.name,'-','') }}iac
+    - deployment: ${{ replace(parameters.resource.alias,'-','') }}iac
       displayName: Azure App Service Deployment
       environment: ${{ parameters.environment }}
       dependsOn: resourceGroupDeploy
@@ -41,7 +41,7 @@ jobs:
       displayName: Azure App Service Deployment
       environment: ${{ parameters.environment }}
       ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-        dependsOn: ${{ replace(parameters.resource.name,'-','') }}iac
+        dependsOn: ${{ replace(parameters.resource.alias,'-','') }}iac
       ${{ else }}:
         dependsOn: resourceGroupDeploy
       strategy:
