@@ -25,7 +25,7 @@ stages:
       - stage: ${{ env }}
       
         variables:
-          - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml
+          - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml@self
 
         jobs:
           - template: ./_jobs/deploy-jobs.yml
