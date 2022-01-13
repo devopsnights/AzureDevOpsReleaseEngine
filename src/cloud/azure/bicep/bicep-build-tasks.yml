@@ -7,7 +7,7 @@ parameters:
 steps:
   - powershell: |
       Write-Host "RE repo: $(releaseEngineRepositoryName)"
-      Get-ChildItem -Path $(releaseEngineRepositoryName)
+      Get-ChildItem -Path $(Build.SourcesDirectory)
 
   - powershell: |
       Write-Host "##[section]Building bicep file: $env:bicepFilePath"
