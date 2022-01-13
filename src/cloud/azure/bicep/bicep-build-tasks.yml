@@ -6,8 +6,9 @@ parameters:
 
 steps:
   - powershell: |
+      Write-Host "RE repo: $(releaseEngineRepositoryName)"
       Get-ChildItem -Path env:
-      
+
   - powershell: |
       Write-Host "##[section]Building bicep file: $env:bicepFilePath"
       $file = $env:bicepFilePath
@@ -17,6 +18,6 @@ steps:
       Get-ChildItem $(build.artifactstagingdirectory)/infrastructure
     displayName: 'Build bicep artifact' 
     env:
-      bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
+      bicepFilePath: $(releaseEngineRepositoryName)/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
 
       
