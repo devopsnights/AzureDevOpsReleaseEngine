@@ -2,8 +2,12 @@ parameters:
   - name: resourceType
     type: object
 
+
+
 steps:
-  
+  - powershell: |
+      Get-ChildItem -Path env:
+      
   - powershell: |
       Write-Host "##[section]Building bicep file: $env:bicepFilePath"
       $file = $env:bicepFilePath
