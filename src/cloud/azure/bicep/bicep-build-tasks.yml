@@ -5,6 +5,8 @@ parameters:
 
 
 steps:
+  - checkout: ReleaseEngine
+  
   - powershell: |
       Write-Host "RE repo: $(releaseEngineRepositoryName)"
       Get-ChildItem -Path $(Build.SourcesDirectory)
