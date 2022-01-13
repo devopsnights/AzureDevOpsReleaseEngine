@@ -10,7 +10,7 @@ variables:
   - name: releaseEngineRepoName
     value: AzureDevOpsReleaseEngine
 
-  - template: src/config/config.yml
+  - template: ./config/config.yml
 
   # - ${{ if eq( variables.Build_Repository_Name, variables.releaseFrameworkRepoName) }}:
   #   - name: bicepDirectory
