@@ -10,9 +10,10 @@ jobs:
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
           resourceType: resourceGroup
+          outDir: resourceGroup
 
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: resourceGroup
+          artifact: governance
           publishLocation: 'pipeline'
