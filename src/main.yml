@@ -9,8 +9,8 @@ variables:
     value: ServiceConnection
   - name: releaseEngineRepoName
     value: AzureDevOpsReleaseEngine
-  - template: src/config/config.yml
-  
+  - template: src/config/config.yml@ReleaseEngine
+
   - ${{ if eq( variables.Build_Repository_Name, variables.releaseFrameworkRepoName) }}:
     - name: bicepDirectory
       value: $(Build.SourcesDirectory)/$(releaseEngineRepoName)/src/cloud/azure/keyVault/
