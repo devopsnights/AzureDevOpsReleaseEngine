@@ -24,7 +24,7 @@ jobs:
                 resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                 location: ${{ parameters.settings.azure.resourceGroup.location }}
                 templateLocation: 'Linked artifact'
-                csmFile: '$(Pipeline.Workspace)/resourceGroup/infrastructure/resourceGroup.json'
+                csmFile: '$(Pipeline.Workspace)/governance/resourceGroup/resourceGroup.json'
                 overrideParameters: >
                   -resourceGroupLocation ${{ parameters.settings.azure.resourceGroup.location }} 
                   -resourceGroupName ${{ parameters.settings.azure.resourceGroup.name }} 
