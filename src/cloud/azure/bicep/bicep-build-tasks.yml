@@ -11,14 +11,16 @@ steps:
   - checkout: ReleaseEngine
 
   - powershell: |
-      Get-ChildItem -Path $(Build.SourcesDirectory) -Recurse
       Write-Host ${{ parameters.outDir }}
 
   - powershell: |
       Write-Host "##[section]Building bicep file: $env:bicepFilePath"
       $file = $env:bicepFilePath
-      New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/infrastructure
-      az bicep build --file $file --outdir $(build.artifactstagingdirectory)/infrastructure
+
+      Write-Host $file
+
+      New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/$env:outDir
+      az bicep build --file $file --outdir $(build.artifactstagingdirectory)/$env:outDir
 
       Get-ChildItem $(build.artifactstagingdirectory)/$env:outDir
     displayName: 'Build bicep artifact' 
