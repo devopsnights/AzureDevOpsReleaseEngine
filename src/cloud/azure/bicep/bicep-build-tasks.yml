@@ -28,7 +28,6 @@ steps:
       $file = Join-Path $sourceDirectory $env:bicepFilePath
 
       Write-Host "##[section]Building bicep file: $file"
-      $file = $env:bicepFilePath
 
       Write-Host $file
 
