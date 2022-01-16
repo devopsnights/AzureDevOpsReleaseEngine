@@ -20,7 +20,7 @@ steps:
         $sourceDirectory = "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"
         Write-Host "Exist"
       }else{
-        $sourceDirectory = $(Build.SourcesDirectory)
+        $sourceDirectory = "$(Build.SourcesDirectory)"
         Write-Host "Don't Exist"
 
       }
