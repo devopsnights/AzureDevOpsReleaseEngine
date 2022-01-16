@@ -15,5 +15,5 @@ jobs:
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: appService
+          artifact: ${{ parameters.resource.alias }}
           publishLocation: 'pipeline'
