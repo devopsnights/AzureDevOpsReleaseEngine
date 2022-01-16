@@ -11,7 +11,7 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
-    - deployment: ${{ replace(parameters.resource.deployName,'-','') }}iac
+    - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
       displayName: IaC - Azure App Service Deployment
       environment: ${{ parameters.environment }}
       dependsOn: resourceGroupDeploy
@@ -29,7 +29,7 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.deployName }}/infrastructure/appService.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.runName }}/infrastructure/appService.json'
                   overrideParameters: >
                     -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }} 
                     -siteName ${{ parameters.resource.name }} 
@@ -41,7 +41,7 @@ jobs:
       displayName: App - Azure App Service Deployment
       environment: ${{ parameters.environment }}
       ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-        dependsOn: ${{ replace(parameters.resource.deployName,'-','') }}iac
+        dependsOn: ${{ replace(parameters.resource.runName,'-','') }}iac
       ${{ else }}:
         dependsOn: resourceGroupDeploy
       strategy:
@@ -54,7 +54,7 @@ jobs:
                   inputs:
                     azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
                     appName: ${{ parameters.resource.name }}
-                    package: $(Pipeline.Workspace)/${{ parameters.resource.deployName }}/**/*.zip
+                    package: $(Pipeline.Workspace)/${{ parameters.resource.runName }}/**/*.zip
 
   # - deployment:
   #   displayName: Azure App Service Deployment
@@ -116,4 +116,4 @@ jobs:
   #                   inputs:
   #                     azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
   #                     appName: ${{ parameters.resource.name }}
-  #                     package: $(Pipeline.Workspace)/${{ parameters.resource.deployName }}/**/*.zip                      
+  #                     package: $(Pipeline.Workspace)/${{ parameters.resource.runName }}/**/*.zip                      

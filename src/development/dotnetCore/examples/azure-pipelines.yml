@@ -40,7 +40,7 @@ extends:
     resources:
       - name: $(applicationName)
         type: dotnetCore
-        deployName: app-releaseengine
+        runName: app-releaseengine
         enabled: true
         deploy:
           type: azureWebApp
@@ -52,7 +52,7 @@ extends:
 
       - name: $(applicationName2)
         type: dotnetCore
-        deployName: app-releaseengine2
+        runName: app-releaseengine2
         enabled: false
         deploy:
           type: azureWebApp

@@ -13,7 +13,7 @@ jobs:
 
 
   - job:
-    displayName: App - ${{ parameters.resource.deployName }} Build Job
+    displayName: App - ${{ parameters.resource.runName }} Build Job
     variables:
       BuildPlatform: 'Any CPU'
       BuildConfiguration: 'Release'
@@ -58,5 +58,5 @@ jobs:
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: ${{ parameters.resource.deployName }}
+          artifact: ${{ parameters.resource.runName }}
           publishLocation: 'pipeline'
