@@ -11,7 +11,8 @@ steps:
   - checkout: ReleaseEngine
 
   - powershell: |
-      Get-ChildItem -Path $(Build.SourcesDirectory)
+      Get-ChildItem -Path $(Build.SourcesDirectory) -Recurse
+      Write-Host ${{ parameters.outDir }}
 
   - powershell: |
       Write-Host "##[section]Building bicep file: $env:bicepFilePath"
