@@ -18,13 +18,16 @@ steps:
 
       if(Test-Path "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"){
         $sourceDirectory = "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"
+        Write-Host "Exist"
       }else{
         $sourceDirectory = $(Build.SourcesDirectory)
+        Write-Host "Don't Exist"
+
       }
 
-      $file = Join-Path $sourceDirectory $env:bicepFilePath
 
-      Write-Host "##[section]Building bicep file: $file"
+      Write-Host "##[section]Building bicep file: $env:bicepFilePath"
+      $file = $env:bicepFilePath
 
       Write-Host $file
 
@@ -34,7 +37,7 @@ steps:
       Get-ChildItem $(build.artifactstagingdirectory)/$env:outDir
     displayName: 'Build bicep artifact' 
     env:
-      bicepFilePath: /src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
+      bicepFilePath: $(Build.SourcesDirectory)/$(releaseEngineRepositoryName)/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
       outDir: ${{ parameters.outDir }}
 
       
