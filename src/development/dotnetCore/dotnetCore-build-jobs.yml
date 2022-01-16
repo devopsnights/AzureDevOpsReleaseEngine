@@ -10,15 +10,17 @@ jobs:
   #   - template: ../../cloud/azure/appService/appService-build-jobs.yml
   #     parameters:
   #       resource: ${{ parameters.resource }}
-  - checkout: self
-  
+
+
   - job:
     displayName: App - ${{ parameters.resource.alias }} Build Job
     variables:
       BuildPlatform: 'Any CPU'
       BuildConfiguration: 'Release'
     steps:
-
+      
+      - checkout: self
+      
       - task: DotNetCoreCLI@2
         displayName: Restore
         inputs:
