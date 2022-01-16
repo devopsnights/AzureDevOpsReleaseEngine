@@ -47,7 +47,7 @@ jobs:
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/application'
           zipAfterPublish: True
 
-      - template: ../bicep/bicep-build-tasks.yml
+      - template: ../../../bicep/bicep-build-tasks.yml
         parameters:
           resourceType: appService
           # resource: ${{ parameters.resource }}
