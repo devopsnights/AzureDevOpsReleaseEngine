@@ -3,7 +3,7 @@ parameters:
     type: object
 
 jobs:
-  - ${{ if eq(parameters.resource.deployment.type, 'azureWebApp') }}:
+  - ${{ if eq(parameters.resource.deploy.type, 'azureWebApp') }}:
     # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
     #   parameters:
     #     resourceType: appService
