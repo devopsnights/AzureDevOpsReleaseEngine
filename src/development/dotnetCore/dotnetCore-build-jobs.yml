@@ -10,6 +10,7 @@ jobs:
   #   - template: ../../cloud/azure/appService/appService-build-jobs.yml
   #     parameters:
   #       resource: ${{ parameters.resource }}
+  - checkout: self
   
   - job:
     displayName: App - ${{ parameters.resource.alias }} Build Job
