@@ -1,6 +1,9 @@
 parameters:
   - name: resourceType
     type: object
+  - name: outDir
+    type: string
+    default: infrastructure
 
 
 
@@ -17,9 +20,10 @@ steps:
       New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)/infrastructure
       az bicep build --file $file --outdir $(build.artifactstagingdirectory)/infrastructure
 
-      Get-ChildItem $(build.artifactstagingdirectory)/infrastructure
+      Get-ChildItem $(build.artifactstagingdirectory)/$env:outDir
     displayName: 'Build bicep artifact' 
     env:
       bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
+      outDir: ${{ parameters.outDir }}
 
       
