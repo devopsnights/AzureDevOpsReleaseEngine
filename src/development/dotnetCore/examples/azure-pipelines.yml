@@ -1,3 +1,11 @@
+resources:
+  repositories:
+  - repository: ReleaseEngine
+    type: github
+    endpoint: devopsnights
+    name: devopsnights/AzureDevOpsReleaseEngine
+    ref: refs/heads/feature/appService
+    
 trigger:
   branches:
     include:
