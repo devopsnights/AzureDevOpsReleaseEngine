@@ -6,5 +6,4 @@ variables:
 
   servicePlanName: plan-dotnetcore-releaseengine-dev
   applicationName: app-dotnetcore-releaseengine-dev 
-  applicationName2: app-dotnetcore2-releaseengine-dev
   

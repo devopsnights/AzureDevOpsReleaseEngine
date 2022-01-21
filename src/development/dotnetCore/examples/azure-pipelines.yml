@@ -1,6 +1,6 @@
 resources:
   repositories:
-  - repository: ReleaseEngine
+  - repository: releaseEngine
     type: github
     endpoint: devopsnights
     name: devopsnights/AzureDevOpsReleaseEngine
@@ -21,14 +21,14 @@ pool:
   name: default
 
 extends: 
-  template: ../../../main.yml
+  template: /main.yml@releaseEngine
   parameters:
     settings:
       build:
         enabled: true
       deploy:
         enabled: true
-        variablesDirectory: ./development/dotnetCore/examples/variables
+        variablesDirectory: ./development/dotnetCore/examples/variables@self
         infrastructure:
           enabled: true
         application:
@@ -43,24 +43,12 @@ extends:
           new: true
       environments:
         - dev
-        # - uat
-        # - prd
+        - uat
+        - prd
     resources:
       - name: $(applicationName)
         type: dotnetCore
         runName: app-releaseengine
-        enabled: true
-        deploy:
-          type: azureWebApp
-          infrastructure:
-            enabled: true
-            servicePlanName: $(servicePlanName)
-          application:
-            enabled: true
-
-      - name: $(applicationName2)
-        type: dotnetCore
-        runName: app-releaseengine2
         enabled: true
         deploy:
           type: azureWebApp
