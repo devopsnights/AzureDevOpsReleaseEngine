@@ -21,7 +21,7 @@ pool:
   name: default
 
 extends: 
-  template: /main.yml@releaseEngine
+  template: /src/main.yml@releaseEngine
   parameters:
     settings:
       build:
