@@ -28,7 +28,7 @@ extends:
         enabled: true
       deploy:
         enabled: true
-        variablesDirectory: ./development/dotnetCore/examples/variables
+        variablesDirectory: /src/development/dotnetCore/examples/variables
         infrastructure:
           enabled: true
         application:
