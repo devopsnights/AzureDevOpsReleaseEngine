@@ -9,12 +9,12 @@ variables:
     value: ServiceConnection
   - name: releaseEngineRepoName
     value: AzureDevOpsReleaseEngine
-  
-  - template: ./../config/config.yml
+
+  - template: config/config.yml
 
   # - ${{ if eq( variables.Build_Repository_Name, variables.releaseFrameworkRepoName) }}:
   #   - name: bicepDirectory
-  #     value: $(Build.SourcesDirectory)/$(releaseEngineRepoName)/src/cloud/azure/keyVault/
+  #     value: $(Build.SourcesDirectory)/$(releaseEngineRepositoryName)/src/cloud/azure/keyVault/
   # - ${{ else }}:
   #   - name: bicepDirectory
   #     value:  $(Build.SourcesDirectory)/src/cloud/azure/keyVault/
@@ -23,7 +23,7 @@ stages:
 
   - ${{ if eq(parameters.settings.build.enabled, 'true') }}:
     - stage: build
-
+      
       jobs:
         
         - template: ./_jobs/build-jobs.yml

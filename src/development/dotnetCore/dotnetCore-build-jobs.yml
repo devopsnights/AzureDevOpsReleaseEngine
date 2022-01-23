@@ -1,0 +1,62 @@
+parameters:
+  - name: resource
+    type: object
+
+jobs:
+  # - ${{ if eq(parameters.resource.deploy.type, 'azureWebApp') }}:
+  #   # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
+  #   #   parameters:
+  #   #     resourceType: appService
+  #   - template: ../../cloud/azure/appService/appService-build-jobs.yml
+  #     parameters:
+  #       resource: ${{ parameters.resource }}
+
+
+  - job:
+    displayName: App - ${{ parameters.resource.runName }} Build Job
+    variables:
+      BuildPlatform: 'Any CPU'
+      BuildConfiguration: 'Release'
+    steps:
+      
+      - checkout: self
+      
+      - task: DotNetCoreCLI@2
+        displayName: Restore
+        inputs:
+          command: restore
+          projects:  |
+            **\*.csproj
+
+      - task: DotNetCoreCLI@2
+        displayName: Build
+        inputs:
+          projects:  |
+            **\*.csproj
+            arguments: '--configuration $(BuildConfiguration)'
+
+      - task: DotNetCoreCLI@2
+        displayName: Test
+        inputs:
+          command: test
+          projects: '**/*[Tt]ests/*.csproj'
+          arguments: '--configuration $(BuildConfiguration)'
+
+      - task: DotNetCoreCLI@2
+        displayName: Publish
+        inputs:
+          command: publish
+          publishWebProjects: True
+          arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/application'
+          zipAfterPublish: True
+
+      - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
+        parameters:
+          resourceType: appService
+          # resource: ${{ parameters.resource }}
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(build.artifactstagingdirectory)'
+          artifact: ${{ parameters.resource.runName }}
+          publishLocation: 'pipeline'

@@ -18,13 +18,13 @@ jobs:
               displayName: Creating Resource Group '${{ parameters.settings.azure.resourceGroup.name }}' by IaC
               inputs:
                 deploymentScope: 'Subscription'
-                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.azureServiceConnection }}'
+                azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                 subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
                 action: 'Create Or Update Resource Group'
                 resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                 location: ${{ parameters.settings.azure.resourceGroup.location }}
                 templateLocation: 'Linked artifact'
-                csmFile: '$(Pipeline.Workspace)/resourceGroup/infrastructure/resourceGroup.json'
+                csmFile: '$(Pipeline.Workspace)/governance/resourceGroup/resourceGroup.json'
                 overrideParameters: >
                   -resourceGroupLocation ${{ parameters.settings.azure.resourceGroup.location }} 
                   -resourceGroupName ${{ parameters.settings.azure.resourceGroup.name }} 

@@ -1,0 +1,8 @@
+variables:
+  serviceConnection: ServiceConnection
+  subscriptionId: 337ba254-3aa0-4551-ba8e-89debefaa373
+  location: northeurope
+  resourceGroupName: rg-dotnetcore-releaseengine-uat
+
+  servicePlanName: plan-dotnetcore-releaseengine-uat
+  applicationName: app-dotnetcore-releaseengine-uat 

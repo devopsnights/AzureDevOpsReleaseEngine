@@ -9,7 +9,7 @@ jobs:
 
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
-          bicepFilePath: $(Build.SourcesDirectory)/src/cloud/azure/keyVault/keyVault.bicep
+          resourceType: ${{ parameters.resource.type }}
 
       - task: PublishPipelineArtifact@1
         inputs:

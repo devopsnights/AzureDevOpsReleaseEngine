@@ -19,3 +19,15 @@ jobs:
         - template: ../cloud/azure/keyVault/keyVault-build-jobs.yml
           parameters:
             settings: ${{ parameters.settings }}
+
+      - ${{ if eq(resource.type, 'appService') }}:
+        - template: ../cloud/azure/appService/appService-build-jobs.yml
+          parameters:
+            resource: ${{ resource }}
+
+      - ${{ if eq(resource.type, 'dotnetCore') }}:
+        - template: ../development/dotnetCore/dotnetCore-build-jobs.yml
+          parameters:
+            resource: ${{ resource }}
+
+            

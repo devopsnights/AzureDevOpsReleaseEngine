@@ -1,19 +1,19 @@
 parameters:
-  - name: settings
+  - name: resource
     type: object
-
 jobs:
-  - job: resourceGroupBuildJob
-    displayName: IaC - Resource Group Build Job
+  - job:
+    displayName: IaC - Azure App Service Build Job
     steps:
+      - powershell: |
+          Get-ChildItem -Path env:
 
       - template: ../bicep/bicep-build-tasks.yml
         parameters:
-          resourceType: resourceGroup
-          outDir: resourceGroup
+          resourceType: appService
 
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: governance
+          artifact: ${{ parameters.resource.runName }}
           publishLocation: 'pipeline'
