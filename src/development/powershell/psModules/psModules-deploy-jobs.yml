@@ -1,0 +1,30 @@
+parameters:
+- name: settings
+  type: object
+- name: resource
+  type: object  
+- name: environment
+  type: string
+
+
+jobs:
+        
+  - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+  
+    - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
+      displayName: Powershell Modules Deployment
+      environment: ${{ parameters.environment }}
+      dependsOn: resourceGroupDeploy
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+
+              # Push a project
+              - task: NuGetCommand@2
+                inputs:
+                  command: 'push'
+                  feedsToUse: 'select'
+                  vstsFeed: 'my-project/my-project-scoped-feed'
+                  publishVstsFeed: 'myTestFeed'      
+
