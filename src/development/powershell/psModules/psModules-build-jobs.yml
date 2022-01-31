@@ -30,7 +30,7 @@ jobs:
       #   workingDirectory: $(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module
 
       - powershell: |
-          Write-Host $(version)
+          Write-Host ${{ parameters.resource.version }}
 
       - task: replacetokens@4
         displayName: Replacing tokenized values
