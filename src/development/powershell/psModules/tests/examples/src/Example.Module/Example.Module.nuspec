@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Example.Module</id>
-    <version>$(moduleVersion)</version>
+    <version>$(version)</version>
     <authors>Wesley_Camargo</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <!-- <license type="expression">MIT</license> -->

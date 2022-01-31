@@ -1,3 +1,9 @@
+parameters:
+  - name: version
+    type: string
+    default: 0.0.1
+
+
 resources:
   repositories:
   - repository: releaseEngine
@@ -48,10 +54,9 @@ extends:
         type: psModules
         runName: psModules
         enabled: true
-        # deploy:
-        #   type: azureWebApp
-        #   infrastructure:
-        #     enabled: true
-        #     servicePlanName: $(servicePlanName)
-        #   application:
-        #     enabled: true
+        deploy:
+          type: azureArtifacts
+          version: ${{ parameters.version }}
+          application:
+            enabled: true
+

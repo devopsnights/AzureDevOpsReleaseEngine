@@ -13,7 +13,7 @@
 
     # Version number of this module.
     # ModuleVersion     = '0.2.0'
-    ModuleVersion     = '$(moduleVersion)'
+    ModuleVersion     = '$(version)'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()

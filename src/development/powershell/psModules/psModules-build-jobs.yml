@@ -6,8 +6,8 @@ jobs:
   - job:
     displayName: Powershell Modules - ${{ parameters.resource.runName }} Build Job
     variables:
-      - name: moduleVersion
-        value: "0.2.0" #TODO: parametrize
+      - name: version
+        value: ${{ parameters.resource.version }} #TODO: parametrize
          
     steps:
       
