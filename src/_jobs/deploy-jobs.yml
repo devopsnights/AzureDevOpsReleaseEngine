@@ -41,6 +41,7 @@ jobs:
       - ${{ if eq(resource.type, 'psModules') }}:
         - template: /src/development/powershell/psModules/psModules-deploy-jobs.yml
           parameters:
+            settings: ${{ parameters.settings }}                  
+            environment: ${{ parameters.environment }}
             resource: ${{ resource }}
-
             
