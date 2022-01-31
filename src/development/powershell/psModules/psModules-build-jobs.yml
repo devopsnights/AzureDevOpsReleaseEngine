@@ -5,6 +5,10 @@ parameters:
 jobs:
   - job:
     displayName: Powershell Modules - ${{ parameters.resource.runName }} Build Job
+    variables:
+      - name: moduleVersion
+        value: "0.2.0" #TODO: parametrize
+         
     steps:
       
       - checkout: self
@@ -24,6 +28,24 @@ jobs:
       #     #   -Source "PowershellModules" `
       #     #   -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
       #   workingDirectory: $(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module
+
+      - task: replacetokens@4
+        displayName: Replacing tokenized values
+        inputs:
+          rootDirectory: $(Pipeline.Workspace)
+          targetFiles: |
+            **/*.psd1
+            **/*.nuspec
+          encoding: auto
+          tokenPattern: azpipelines
+          writeBOM: true
+          actionOnMissing: warn
+          keepToken: false
+          actionOnNoFiles: continue
+          enableTransforms: false
+          useLegacyPattern: false
+          enableTelemetry: false
+          verbosity: 'detailed'
 
       - task: NuGetCommand@2
         inputs:
