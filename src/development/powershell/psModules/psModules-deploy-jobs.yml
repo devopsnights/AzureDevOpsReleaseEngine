@@ -24,7 +24,8 @@ jobs:
               - task: NuGetCommand@2
                 inputs:
                   command: 'push'
-                  feedsToUse: 'select'
-                  vstsFeed: 'my-project/my-project-scoped-feed'
-                  publishVstsFeed: 'myTestFeed'      
+                  packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
+                  nuGetFeedType: 'internal'
+                  publishVstsFeed: 'devopsnights'
+                  allowPackageConflicts: true
 
