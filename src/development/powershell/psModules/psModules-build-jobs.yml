@@ -7,7 +7,7 @@ jobs:
     displayName: Powershell Modules - ${{ parameters.resource.runName }} Build Job
     variables:
       - name: version
-        value: ${{ parameters.resource.version }} #TODO: parametrize
+        value: ${{ parameters.resource.deploy.version }} #TODO: parametrize
          
     steps:
       
@@ -30,7 +30,8 @@ jobs:
       #   workingDirectory: $(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module
 
       - powershell: |
-          Write-Host ${{ parameters.resource.version }}
+          Write-Host ${{ parameters.resource.deploy.version }}
+          Write-Host $(version)
 
       - task: replacetokens@4
         displayName: Replacing tokenized values
