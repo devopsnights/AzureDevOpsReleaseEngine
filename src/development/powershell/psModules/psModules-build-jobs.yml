@@ -10,23 +10,29 @@ jobs:
       - checkout: self
         persistCredentials: true
       
-      - powershell: |
-          nuget spec Example.Module
-          nuget pack ./Example.Module.nuspec
+      # - powershell: |
+      #     nuget spec Example.Module
+      #     nuget pack ./Example.Module.nuspec
           
-          # nuget sources Add `
-          #   -Name "PowershellModules" `
-          #   -Source "https://wesleycamargo.pkgs.visualstudio.com/_packaging/Powershell/nuget/v3/index.json" `
-          #   -username "wesleycamargo@outlook.com" `
-          #   -password "$(System.AccessToken)"
+      #     # nuget sources Add `
+      #     #   -Name "PowershellModules" `
+      #     #   -Source "https://wesleycamargo.pkgs.visualstudio.com/_packaging/Powershell/nuget/v3/index.json" `
+      #     #   -username "wesleycamargo@outlook.com" `
+      #     #   -password "$(System.AccessToken)"
           
-          # nuget push `
-          #   -Source "PowershellModules" `
-          #   -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
-        workingDirectory: $(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module
+      #     # nuget push `
+      #     #   -Source "PowershellModules" `
+      #     #   -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
+      #   workingDirectory: $(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module
 
-      # - task: PublishPipelineArtifact@1
-      #   inputs:
-      #     targetPath: '$(build.artifactstagingdirectory)'
-      #     artifact: ${{ parameters.resource.runName }}
-      #     publishLocation: 'pipeline'
+      - task: NuGetCommand@2
+        inputs:
+          command: 'pack'
+          packagesToPack: '**/Example.Module.nuspec'
+          packDestination: '$(build.artifactstagingdirectory)'
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(build.artifactstagingdirectory)'
+          artifact: ${{ parameters.resource.runName }}
+          publishLocation: 'pipeline'
