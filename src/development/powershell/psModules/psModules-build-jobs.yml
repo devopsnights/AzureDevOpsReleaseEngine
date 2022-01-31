@@ -28,7 +28,7 @@ jobs:
       - task: NuGetCommand@2
         inputs:
           command: 'pack'
-          packagesToPack: '**/Example.Module.nuspec'
+          packagesToPack: '$(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module/Example.Module.psd1'
           packDestination: '$(build.artifactstagingdirectory)'
 
       - task: PublishPipelineArtifact@1
