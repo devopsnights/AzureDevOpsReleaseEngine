@@ -30,4 +30,8 @@ jobs:
           parameters:
             resource: ${{ resource }}
 
+      - ${{ if eq(resource.type, 'psModules') }}:
+        - template: /src/development/powershell/psModules/psModules-build-jobs.yml
+          parameters:
+            resource: ${{ resource }}
             

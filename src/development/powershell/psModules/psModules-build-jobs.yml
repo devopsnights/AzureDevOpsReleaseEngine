@@ -23,7 +23,7 @@ jobs:
           # nuget push `
           #   -Source "PowershellModules" `
           #   -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
-        workingDirectory: src/development/powershell/psModules/tests/examples/src/Example.Module
+        workingDirectory: /src/development/powershell/psModules/tests/examples/src/Example.Module
 
       # - task: PublishPipelineArtifact@1
       #   inputs:
