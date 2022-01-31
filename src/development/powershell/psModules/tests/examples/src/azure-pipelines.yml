@@ -44,11 +44,11 @@ extends:
         resourceGroup:
           name: $(resourceGroupName)
           location: $(location)
-          new: true
+          new: false
       environments:
         - dev
-        - uat
-        - prd
+        # - uat
+        # - prd
     resources:
       - name: psModules
         type: psModules
