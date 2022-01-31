@@ -13,8 +13,7 @@ trigger:
     - feature/*
   paths:
     include:
-      - src/development/dotnetCore/*
-      
+      - src/development/powershell/psModules/*
 pool:
   vmImage: 'windows-latest'
   # name: default
