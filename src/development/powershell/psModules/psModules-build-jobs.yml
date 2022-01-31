@@ -29,6 +29,9 @@ jobs:
       #     #   -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
       #   workingDirectory: $(Build.SourcesDirectory)/src/development/powershell/psModules/tests/examples/src/Example.Module
 
+      - powershell: |
+          Write-Host $(version)
+
       - task: replacetokens@4
         displayName: Replacing tokenized values
         inputs:
