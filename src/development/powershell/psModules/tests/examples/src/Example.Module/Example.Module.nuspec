@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Example.Module</id>
+    <version>0.2.0</version>
+    <authors>Wesley_Camargo</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!-- <license type="expression">MIT</license> -->
+    <!-- <icon>icon.png</icon> -->
+    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>
+    <description>Package description</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <!-- <copyright>$copyright$</copyright> -->
+    <!-- <tags>Tag1 Tag2</tags> -->
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
