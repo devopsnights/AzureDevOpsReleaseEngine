@@ -10,7 +10,6 @@ jobs:
   - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
     displayName: Powershell Modules Deployment
     environment: ${{ parameters.environment }}
-    dependsOn: resourceGroupDeploy
     strategy:
       runOnce:
         deploy:
