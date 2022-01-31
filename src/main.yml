@@ -35,8 +35,9 @@ stages:
     - ${{ each env in parameters.settings.environments }}:
       - stage: ${{ env }}
       
-        variables:
-          - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml@self
+        ${{ if ne(parameters.settings.deploy.variablesDirectory,'') }}:
+          variables:
+            - template: ${{ parameters.settings.deploy.variablesDirectory }}/${{ env }}-vars.yml@self
 
         jobs:
           - template: ./_jobs/deploy-jobs.yml
