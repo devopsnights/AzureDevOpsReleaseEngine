@@ -14,15 +14,15 @@ jobs:
           nuget spec Example.Module
           nuget pack ./Example.Module.nuspec
           
-          nuget sources Add `
-            -Name "PowershellModules" `
-            -Source "https://wesleycamargo.pkgs.visualstudio.com/_packaging/Powershell/nuget/v3/index.json" `
-            -username "wesleycamargo@outlook.com" `
-            -password "$(System.AccessToken)"
+          # nuget sources Add `
+          #   -Name "PowershellModules" `
+          #   -Source "https://wesleycamargo.pkgs.visualstudio.com/_packaging/Powershell/nuget/v3/index.json" `
+          #   -username "wesleycamargo@outlook.com" `
+          #   -password "$(System.AccessToken)"
           
-          nuget push `
-            -Source "PowershellModules" `
-            -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
+          # nuget push `
+          #   -Source "PowershellModules" `
+          #   -ApiKey AzureDevOpsServices "./Example.Module.0.0.1.nupkg"
         workingDirectory: src/development/powershell/psModules/tests/examples/src/Example.Module
 
       # - task: PublishPipelineArtifact@1
