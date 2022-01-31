@@ -16,8 +16,8 @@ trigger:
       - src/development/dotnetCore/*
       
 pool:
-  # vmImage: 'windows-latest'
-  name: default
+  vmImage: 'windows-latest'
+  # name: default
 
 extends: 
   template: /src/main.yml@releaseEngine
