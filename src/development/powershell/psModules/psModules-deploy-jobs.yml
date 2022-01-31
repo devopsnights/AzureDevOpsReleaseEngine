@@ -6,26 +6,21 @@ parameters:
 - name: environment
   type: string
 
-
 jobs:
-        
-  - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-  
-    - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
-      displayName: Powershell Modules Deployment
-      environment: ${{ parameters.environment }}
-      dependsOn: resourceGroupDeploy
-      strategy:
-        runOnce:
-          deploy:
-            steps:
+  - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
+    displayName: Powershell Modules Deployment
+    environment: ${{ parameters.environment }}
+    dependsOn: resourceGroupDeploy
+    strategy:
+      runOnce:
+        deploy:
+          steps:
 
-              # Push a project
-              - task: NuGetCommand@2
-                inputs:
-                  command: 'push'
-                  packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
-                  nuGetFeedType: 'internal'
-                  publishVstsFeed: 'devopsnights'
-                  allowPackageConflicts: true
-
+            # Push a project
+            - task: NuGetCommand@2
+              inputs:
+                command: 'push'
+                packagesToPush: '$(Pipeline.Workspace)/**/*.nupkg;!$(Pipeline.Workspace)/**/*.symbols.nupkg'
+                nuGetFeedType: 'internal'
+                publishVstsFeed: 'devopsnights'
+                allowPackageConflicts: true
