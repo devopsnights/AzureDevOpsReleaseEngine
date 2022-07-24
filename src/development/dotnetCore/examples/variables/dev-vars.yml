@@ -5,5 +5,5 @@ variables:
   resourceGroupName: rg-dotnetcore-releaseengine-dev
 
   servicePlanName: plan-dotnetcore-releaseengine-dev
-  applicationName: app-dotnetcore-releaseengine-dev 
+  appServiceName: app-dotnetcore-releaseengine-dev 
   

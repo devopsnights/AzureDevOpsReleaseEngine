@@ -30,8 +30,8 @@ jobs:
                   templateLocation: 'Linked artifact'
                   csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json'
                   overrideParameters: >
-                    -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }} 
-                    -siteName ${{ parameters.resource.name }} 
+                    -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }}
+                    -siteName ${{ parameters.resource.deploy.infrastructure.appServiceName }}
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
 
@@ -52,7 +52,7 @@ jobs:
               - task: AzureWebApp@1
                 inputs:
                   azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
-                  appName: ${{ parameters.resource.name }}
+                  appName: ${{ parameters.resource.deploy.infrastructure.appServiceName }}
                   package: $(Pipeline.Workspace)/${{ parameters.resource.name }}/**/*.zip
 
   # - deployment:
