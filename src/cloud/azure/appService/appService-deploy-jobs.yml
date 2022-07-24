@@ -10,7 +10,7 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
-    - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
+    - deployment: ${{ replace(parameters.resource.name,'-','') }}iac
       displayName: IaC - Azure App Service Deployment
       environment: ${{ parameters.environment }}
       dependsOn: resourceGroupDeploy

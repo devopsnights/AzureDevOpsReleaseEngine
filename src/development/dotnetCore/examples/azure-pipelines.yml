@@ -46,9 +46,8 @@ extends:
         - uat
         - prd
     resources:
-      - name: $(applicationName)
+      - name: example-dotnetcore
         type: dotnetCore
-        runName: app-releaseengine
         enabled: true
         deploy:
           type: azureWebApp
