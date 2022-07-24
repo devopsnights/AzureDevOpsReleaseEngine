@@ -45,7 +45,7 @@ extends:
         # - uat
         # - prd
     resources:
-      - name: example-appService
+      - name: example-appService-iac
         type: appService
         enabled: true
         deploy:
