@@ -10,7 +10,8 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
-    - deployment: ${{ replace(parameters.resource.name,'-','') }}iac
+    # - deployment: ${{ replace(parameters.resource.name,'-','') }}iac
+    - deployment: ${{ parameters.resource.name }}iac
       displayName: IaC - Azure App Service Deployment
       environment: ${{ parameters.environment }}
       dependsOn: resourceGroupDeploy
@@ -34,25 +35,25 @@ jobs:
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
 
-#   - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
-#     - deployment:
-#       displayName: App - Azure App Service Deployment
-#       environment: ${{ parameters.environment }}
-#       ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-#         dependsOn: ${{ replace(parameters.resource.runName,'-','') }}iac
-#       ${{ else }}:
-#         dependsOn: resourceGroupDeploy
-#       strategy:
-#         runOnce:
-#           deploy:
-#             steps:
+  - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
+    - deployment:
+      displayName: App - Azure App Service Deployment
+      environment: ${{ parameters.environment }}
+      ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+        dependsOn: ${{ parameters.resource.name }}iac
+      ${{ else }}:
+        dependsOn: resourceGroupDeploy
+      strategy:
+        runOnce:
+          deploy:
+            steps:
 
-#               - ${{ if ne( parameters.resource.type, 'appService') }}:
-#                 - task: AzureWebApp@1
-#                   inputs:
-#                     azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
-#                     appName: ${{ parameters.resource.name }}
-#                     package: $(Pipeline.Workspace)/${{ parameters.resource.runName }}/**/*.zip
+              # - ${{ if ne( parameters.resource.type, 'appService') }}:
+              - task: AzureWebApp@1
+                inputs:
+                  azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
+                  appName: ${{ parameters.resource.name }}
+                  package: $(Pipeline.Workspace)/${{ parameters.resource.name }}/**/*.zip
 
   # - deployment:
   #   displayName: Azure App Service Deployment

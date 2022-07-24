@@ -15,7 +15,6 @@ trigger:
     include:
       - src/development/dotnetCore/*
       
-      
 pool:
   vmImage: 'windows-latest'
   # name: default
@@ -46,7 +45,7 @@ extends:
         - uat
         - prd
     resources:
-      - name: example-dotnetcore
+      - name: exampleDotnetCore
         type: dotnetCore
         enabled: true
         deploy:
