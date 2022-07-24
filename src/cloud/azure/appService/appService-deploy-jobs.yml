@@ -18,9 +18,6 @@ jobs:
         runOnce:
           deploy:
             steps:
-              - powershell: |
-                  Get-Content $(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json
-
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                 inputs:
