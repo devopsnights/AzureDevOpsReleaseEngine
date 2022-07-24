@@ -19,7 +19,9 @@ jobs:
         runOnce:
           deploy:
             steps:
-
+              - powershell: |
+                  Get-ChildItem $(Pipeline.Workspace) -Recurse
+                  
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                 inputs:
@@ -29,7 +31,7 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.runName }}/infrastructure/appService.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json'
                   overrideParameters: >
                     -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }} 
                     -siteName ${{ parameters.resource.name }} 
