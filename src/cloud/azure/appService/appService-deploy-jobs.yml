@@ -47,6 +47,7 @@ jobs:
         runOnce:
           deploy:
             steps:
+              
               - powershell:
                   $timeoutMinutes = 2
 
@@ -62,13 +63,14 @@ jobs:
 
                       try {
 
-                          $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
-                          $req = Invoke-WebRequest -Uri $uri
-                      
-                          if($null -ne $req.StatusCode){
-                            $statusCode = $req.StatusCode
-                          }
-                          Write-Output    "Status Code -- $statusCode"
+                        $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
+                        
+                        $req = Invoke-WebRequest -Uri $uri
+                    
+                        if($null -ne $req.StatusCode){
+                          $statusCode = $req.StatusCode
+                        }
+                        Write-Output    "Status Code -- $statusCode"
                       } catch {}
                       
                       $timeoutReached = ((Get-Date) -gt $endTime)
