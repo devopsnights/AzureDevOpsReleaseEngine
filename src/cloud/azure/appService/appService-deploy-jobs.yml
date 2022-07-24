@@ -65,13 +65,11 @@ jobs:
                           $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
                           $req = Invoke-WebRequest -Uri $uri
                       
-                          $statusCode = $req.StatusCode
+                          if($null -ne $req.StatusCode){
+                            $statusCode = $req.StatusCode
+                          }
                           Write-Output    "Status Code -- $statusCode"
-                      } catch {
-
-                          $statusCode = $_.Exception.Response.StatusCode.Value__
-                          Write-Output "Status Code --- $statusCode"
-                      }
+                      } catch {}
                       
                       $timeoutReached = ((Get-Date) -gt $endTime)
                       if ($timeoutReached) {
