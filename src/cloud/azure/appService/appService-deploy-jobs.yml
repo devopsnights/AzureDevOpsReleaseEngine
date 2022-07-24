@@ -6,7 +6,6 @@ parameters:
 - name: environment
   type: string
 
-
 jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
@@ -19,7 +18,6 @@ jobs:
         runOnce:
           deploy:
             steps:
-
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                 inputs:
@@ -29,32 +27,32 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.runName }}/infrastructure/appService.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json'
                   overrideParameters: >
                     -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }} 
                     -siteName ${{ parameters.resource.name }} 
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
 
-  - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
-    - deployment:
-      displayName: App - Azure App Service Deployment
-      environment: ${{ parameters.environment }}
-      ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-        dependsOn: ${{ replace(parameters.resource.runName,'-','') }}iac
-      ${{ else }}:
-        dependsOn: resourceGroupDeploy
-      strategy:
-        runOnce:
-          deploy:
-            steps:
+#   - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
+#     - deployment:
+#       displayName: App - Azure App Service Deployment
+#       environment: ${{ parameters.environment }}
+#       ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+#         dependsOn: ${{ replace(parameters.resource.runName,'-','') }}iac
+#       ${{ else }}:
+#         dependsOn: resourceGroupDeploy
+#       strategy:
+#         runOnce:
+#           deploy:
+#             steps:
 
-              - ${{ if ne( parameters.resource.type, 'appService') }}:
-                - task: AzureWebApp@1
-                  inputs:
-                    azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
-                    appName: ${{ parameters.resource.name }}
-                    package: $(Pipeline.Workspace)/${{ parameters.resource.runName }}/**/*.zip
+#               - ${{ if ne( parameters.resource.type, 'appService') }}:
+#                 - task: AzureWebApp@1
+#                   inputs:
+#                     azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
+#                     appName: ${{ parameters.resource.name }}
+#                     package: $(Pipeline.Workspace)/${{ parameters.resource.runName }}/**/*.zip
 
   # - deployment:
   #   displayName: Azure App Service Deployment

@@ -1,3 +1,11 @@
+resources:
+  repositories:
+  - repository: ReleaseEngine
+    type: github
+    endpoint: devopsnights
+    name: devopsnights/AzureDevOpsReleaseEngine
+    ref: refs/heads/feature/appService
+
 trigger:
   branches:
     include:
@@ -12,14 +20,14 @@ pool:
   # name: default
 
 extends: 
-  template: ../../../../main.yml
+  template: /src/main.yml
   parameters:
     settings:
       build:
         enabled: true
       deploy:
         enabled: true
-        variablesDirectory: ./cloud/azure/appService/examples/variables
+        variablesDirectory: /src/cloud/azure/appService/examples/variables
         infrastructure:
           enabled: true
         application:
@@ -37,7 +45,7 @@ extends:
         # - uat
         # - prd
     resources:
-      - name: $(appServiceName)
+      - name: example-appService-iac
         type: appService
         enabled: true
         deploy:
