@@ -20,7 +20,6 @@ pool:
   # name: default
 
 extends: 
-  # template: ../../../../main.yml
   template: /src/main.yml
   parameters:
     settings:
@@ -28,7 +27,7 @@ extends:
         enabled: true
       deploy:
         enabled: true
-        variablesDirectory: ./cloud/azure/appService/examples/variables
+        variablesDirectory: /src/cloud/azure/appService/examples/variables
         infrastructure:
           enabled: true
         application:
