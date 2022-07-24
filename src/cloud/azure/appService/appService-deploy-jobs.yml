@@ -8,7 +8,7 @@ parameters:
 
 
 jobs:
-  - deployment: resourceGroupDeploy
+  - deployment: appServiceDeploy
     displayName: Azure Resource Group Deployment
     environment: ${{ parameters.environment }}
     strategy:
