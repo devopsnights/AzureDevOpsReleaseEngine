@@ -20,8 +20,9 @@ jobs:
           deploy:
             steps:
               - powershell: |
-                  Get-ChildItem $(Pipeline.Workspace) -Recurse
-                  
+                  Get-Content $(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json
+
+
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
                 inputs:
