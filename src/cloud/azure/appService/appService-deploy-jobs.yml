@@ -47,7 +47,40 @@ jobs:
         runOnce:
           deploy:
             steps:
+              - powershell:
+                  $timeoutMinutes = 2
 
+                  $timeout = New-TimeSpan -Minutes $timeoutMinutes
+                  $endTime = (Get-Date).Add($timeout)
+
+                  do {
+                      Start-Sleep -Seconds 10
+
+                      Write-Host "##[command]Checking if App Service is available..." -ForegroundColor Blue
+
+                      $statusCode = $null
+
+                      try {
+
+                          $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
+                          $req = Invoke-WebRequest -Uri $uri
+                      
+                          $statusCode = $req.StatusCode
+                          Write-Output    "Status Code -- $statusCode"
+                      } catch {
+
+                          $statusCode = $_.Exception.Response.StatusCode.Value__
+                          Write-Output "Status Code --- $statusCode"
+                      }
+                      
+                      $timeoutReached = ((Get-Date) -gt $endTime)
+                      if ($timeoutReached) {
+                          Write-Warning "Timeout reached"
+                          return $false
+                      }
+                  } until ($statusCode -eq 200 -or $timeoutReached)
+                displayName: Waiting web app availability
+              
               # - ${{ if ne( parameters.resource.type, 'appService') }}:
               - task: AzureWebApp@1
                 inputs:
