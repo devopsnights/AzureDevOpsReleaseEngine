@@ -48,7 +48,7 @@ jobs:
           deploy:
             steps:
               
-              - powershell:
+              - powershell: |
                   $timeoutMinutes = 2
 
                   $timeout = New-TimeSpan -Minutes $timeoutMinutes
