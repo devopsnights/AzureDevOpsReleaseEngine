@@ -27,7 +27,7 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resourceType }}.json'
                   overrideParameters: >
                     -sqlAdminUserName ${{ parameters.resource.deploy.infrastructure.sqlAdminUserName }}
                     -sqlAdminPassword ${{ parameters.resource.deploy.infrastructure.sqlAdminPassword }}
