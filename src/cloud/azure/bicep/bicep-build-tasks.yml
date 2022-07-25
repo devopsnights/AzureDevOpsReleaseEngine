@@ -1,5 +1,5 @@
 parameters:
-  - name: resourceType
+  - name: resource
     type: object
   - name: outDir
     type: string
@@ -20,9 +20,9 @@ steps:
 
       # if("${{ parameters.isSolution }}" -eq "true")
       # {
-      #   $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
+      #   $bicepFilePath = "/src/cloud/azure/${{ parameters.resource.type }}/${{ parameters.resource.type }}.bicep"
       # }else{
-      #   $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/bicep/${{ parameters.resourceType }}.bicep"
+      #   $bicepFilePath = "/src/solutions/azure/${{ parameters.resource.type }}/bicep/${{ parameters.resource.type }}.bicep"
       # }
 
       if(Test-Path "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"){

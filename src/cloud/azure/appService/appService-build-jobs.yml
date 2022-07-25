@@ -8,5 +8,5 @@ jobs:
 
       - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
-          resourceType: appService
+          resource: ${{ parameters.resource }}
           bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep
