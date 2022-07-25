@@ -45,29 +45,14 @@ extends:
         # - prd
     resources:
       
-      # - name: exampleBasicWebApp
-      #   type: basicWebApplication
-      #   enabled: true
-      #   deploy:
-      #     infrastructure:
-      #       enabled: true
-      #       sqlAdminUserName: wesley
-      #       sqlAdminPassword: $(sqlAdminPassword)
-      #       sqlEmailAddress: 'wesley@releaseengine.com'
-      #     application:
-      #       enabled: false
-
-      - name: exampleDotnetCore
-        type: dotnetCore
+      - name: exampleBasicWebApp
+        type: basicWebApplication
         enabled: true
         deploy:
-          type: basicWebApplication
           infrastructure:
             enabled: true
-            servicePlanName: $(servicePlanName)
-            appServiceName: $(appServiceName)
             sqlAdminUserName: wesley
             sqlAdminPassword: $(sqlAdminPassword)
-            sqlEmailAddress: 'wesley@releaseengine.com'            
+            sqlEmailAddress: 'wesley@releaseengine.com'
           application:
-            enabled: true
+            enabled: false
