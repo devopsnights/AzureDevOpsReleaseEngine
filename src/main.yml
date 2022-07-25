@@ -19,6 +19,9 @@ variables:
   #   - name: bicepDirectory
   #     value:  $(Build.SourcesDirectory)/src/cloud/azure/keyVault/
 
+pool:
+  vmImage: 'windows-latest'
+
 stages:
 
   - ${{ if eq(parameters.settings.build.enabled, 'true') }}:

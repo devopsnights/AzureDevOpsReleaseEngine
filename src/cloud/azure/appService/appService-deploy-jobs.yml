@@ -10,9 +10,8 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
-    # - deployment: ${{ replace(parameters.resource.name,'-','') }}iac
     - deployment: ${{ parameters.resource.name }}iac
-      displayName: IaC - Azure App Service Deployment
+      displayName: IaC - Azure Deployment
       environment: ${{ parameters.environment }}
       dependsOn: resourceGroupDeploy
       strategy:
@@ -20,7 +19,7 @@ jobs:
           deploy:
             steps:
               - task: AzureResourceManagerTemplateDeployment@3
-                displayName: Creating App Service '${{ parameters.resource.name }}' by IaC
+                displayName: Creating '${{ parameters.resource.name }}' by IaC
                 inputs:
                   azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                   subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
@@ -28,7 +27,7 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/infrastructure/appService.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/infrastructure/${{ parameters.resource.type }}.json'
                   overrideParameters: ${{ parameters.resource.deploy.infrastructure.overrideParameters }}
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'

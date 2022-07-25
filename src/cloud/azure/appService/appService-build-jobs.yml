@@ -5,8 +5,6 @@ jobs:
   - job:
     displayName: IaC - Azure App Service Build Job
     steps:
-      - powershell: |
-          Get-ChildItem -Path env:
 
       - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
