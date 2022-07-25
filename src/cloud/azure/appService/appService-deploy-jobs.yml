@@ -11,8 +11,8 @@ jobs:
     parameters:
       settings: ${{ parameters.settings }}                  
       environment: ${{ parameters.environment }}
-      resource: ${{ resource }} 
-      
+      resource: ${{ parameters.resource }} 
+
   # - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
   #   - deployment: ${{ parameters.resource.name }}iac
