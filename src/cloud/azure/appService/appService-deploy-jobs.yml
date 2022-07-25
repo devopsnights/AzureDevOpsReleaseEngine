@@ -10,7 +10,8 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
-    - deployment: ${{ replace(parameters.resource.runName,'-','') }}iac
+    # - deployment: ${{ replace(parameters.resource.name,'-','') }}iac
+    - deployment: ${{ parameters.resource.name }}iac
       displayName: IaC - Azure App Service Deployment
       environment: ${{ parameters.environment }}
       dependsOn: resourceGroupDeploy
@@ -29,30 +30,63 @@ jobs:
                   templateLocation: 'Linked artifact'
                   csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json'
                   overrideParameters: >
-                    -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }} 
-                    -siteName ${{ parameters.resource.name }} 
+                    -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }}
+                    -siteName ${{ parameters.resource.deploy.infrastructure.appServiceName }}
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
 
-#   - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
-#     - deployment:
-#       displayName: App - Azure App Service Deployment
-#       environment: ${{ parameters.environment }}
-#       ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-#         dependsOn: ${{ replace(parameters.resource.runName,'-','') }}iac
-#       ${{ else }}:
-#         dependsOn: resourceGroupDeploy
-#       strategy:
-#         runOnce:
-#           deploy:
-#             steps:
+  - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
+    - deployment:
+      displayName: App - Azure App Service Deployment
+      environment: ${{ parameters.environment }}
+      ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+        dependsOn: ${{ parameters.resource.name }}iac
+      ${{ else }}:
+        dependsOn: resourceGroupDeploy
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              
+              - powershell: |
+                  $timeoutMinutes = 2
 
-#               - ${{ if ne( parameters.resource.type, 'appService') }}:
-#                 - task: AzureWebApp@1
-#                   inputs:
-#                     azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
-#                     appName: ${{ parameters.resource.name }}
-#                     package: $(Pipeline.Workspace)/${{ parameters.resource.runName }}/**/*.zip
+                  $timeout = New-TimeSpan -Minutes $timeoutMinutes
+                  $endTime = (Get-Date).Add($timeout)
+
+                  do {
+                      Start-Sleep -Seconds 10
+
+                      Write-Host "##[command]Checking if App Service is available..." -ForegroundColor Blue
+
+                      $statusCode = $null
+
+                      try {
+
+                        $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
+                        
+                        $req = Invoke-WebRequest -Uri $uri
+                    
+                        if($null -ne $req.StatusCode){
+                          $statusCode = $req.StatusCode
+                        }
+                        Write-Output    "Status Code -- $statusCode"
+                      } catch {}
+                      
+                      $timeoutReached = ((Get-Date) -gt $endTime)
+                      if ($timeoutReached) {
+                          Write-Warning "Timeout reached"
+                          return $false
+                      }
+                  } until ($statusCode -eq 200 -or $timeoutReached)
+                displayName: Waiting web app availability
+              
+              # - ${{ if ne( parameters.resource.type, 'appService') }}:
+              - task: AzureWebApp@1
+                inputs:
+                  azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
+                  appName: ${{ parameters.resource.deploy.infrastructure.appServiceName }}
+                  package: $(Pipeline.Workspace)/${{ parameters.resource.name }}/**/*.zip
 
   # - deployment:
   #   displayName: Azure App Service Deployment

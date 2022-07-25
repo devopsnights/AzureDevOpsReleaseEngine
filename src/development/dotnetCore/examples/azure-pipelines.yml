@@ -4,7 +4,7 @@ resources:
     type: github
     endpoint: devopsnights
     name: devopsnights/AzureDevOpsReleaseEngine
-    ref: refs/heads/feature/appService
+    ref: refs/heads/feature/dotnetCore
     
 trigger:
   branches:
@@ -15,10 +15,9 @@ trigger:
     include:
       - src/development/dotnetCore/*
       
-      
 pool:
-  # vmImage: 'windows-latest'
-  name: default
+  vmImage: 'windows-latest'
+  # name: default
 
 extends: 
   template: /src/main.yml@releaseEngine
@@ -46,14 +45,14 @@ extends:
         - uat
         - prd
     resources:
-      - name: $(applicationName)
+      - name: exampleDotnetCore
         type: dotnetCore
-        runName: app-releaseengine
         enabled: true
         deploy:
           type: azureWebApp
           infrastructure:
             enabled: true
             servicePlanName: $(servicePlanName)
+            appServiceName: $(appServiceName)
           application:
             enabled: true

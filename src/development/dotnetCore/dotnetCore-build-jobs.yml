@@ -13,7 +13,7 @@ jobs:
 
 
   - job:
-    displayName: App - ${{ parameters.resource.runName }} Build Job
+    displayName: App - ${{ parameters.resource.name }} Build Job
     variables:
       BuildPlatform: 'Any CPU'
       BuildConfiguration: 'Release'
@@ -53,10 +53,9 @@ jobs:
       - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
           resourceType: appService
-          # resource: ${{ parameters.resource }}
 
       - task: PublishPipelineArtifact@1
         inputs:
           targetPath: '$(build.artifactstagingdirectory)'
-          artifact: ${{ parameters.resource.runName }}
+          artifact: ${{ parameters.resource.name }}
           publishLocation: 'pipeline'

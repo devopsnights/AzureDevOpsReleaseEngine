@@ -45,12 +45,13 @@ extends:
         # - uat
         # - prd
     resources:
-      - name: example-appService-iac
+      - name: exampleAppService
         type: appService
         enabled: true
         deploy:
           infrastructure:
             enabled: true
             servicePlanName: $(servicePlanName)
+            appServiceName: $(appServiceName)
           application:
             enabled: false
