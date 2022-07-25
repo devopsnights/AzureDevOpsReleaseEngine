@@ -14,7 +14,7 @@ jobs:
   #     environment: ${{ parameters.environment }}
   #     resource: ${{ parameters.resource }} 
 
-  - deployment: resourceGroupDeploy
+  - deployment: resourceGroupiac
     displayName: Azure Resource Group Deployment
     environment: ${{ parameters.environment }}
     strategy:
