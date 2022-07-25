@@ -12,9 +12,3 @@ jobs:
         parameters:
           resourceType: appService
           bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep
-
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: $(build.artifactstagingdirectory)
-          artifact: ${{ parameters.resource.name }}-iac
-          publishLocation: pipeline
