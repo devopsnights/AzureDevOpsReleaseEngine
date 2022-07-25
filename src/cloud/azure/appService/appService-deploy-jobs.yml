@@ -29,9 +29,7 @@ jobs:
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
                   csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/appService.json'
-                  overrideParameters: >
-                    -servicePlanName ${{ parameters.resource.deploy.infrastructure.servicePlanName }}
-                    -siteName ${{ parameters.resource.deploy.infrastructure.appServiceName }}
+                  overrideParameters: ${{ parameters.resource.deploy.infrastructure.overrideParameters }}                    
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
 

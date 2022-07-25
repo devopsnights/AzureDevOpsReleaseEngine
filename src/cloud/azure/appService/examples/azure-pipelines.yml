@@ -53,5 +53,8 @@ extends:
             enabled: true
             servicePlanName: $(servicePlanName)
             appServiceName: $(appServiceName)
+            overrideParameters: >
+              -servicePlanName $(servicePlanName)
+              -siteName $(appServiceName)
           application:
             enabled: false
