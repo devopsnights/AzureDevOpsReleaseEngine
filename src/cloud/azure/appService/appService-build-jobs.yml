@@ -8,7 +8,7 @@ jobs:
       - powershell: |
           Get-ChildItem -Path env:
 
-      - template: ../bicep/bicep-build-tasks.yml
+      - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
           resourceType: appService
           bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep
