@@ -18,7 +18,7 @@ jobs:
       - ${{ if eq(resource.type, 'resourceGroup') }}:
         - template: /src/cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
           parameters:
-            settings: ${{ parameters.settings }}
+            resource: ${{ resource }}
 
       - ${{ if eq(resource.type, 'keyVault') }}:
         - template: ../cloud/azure/keyVault/keyVault-build-jobs.yml
