@@ -1,0 +1,5 @@
+variables:
+  serviceConnection: ServiceConnection
+  subscriptionId: 337ba254-3aa0-4551-ba8e-89debefaa373
+  location: westeurope
+  resourceGroupName: rg-basicWebApplication-uat
