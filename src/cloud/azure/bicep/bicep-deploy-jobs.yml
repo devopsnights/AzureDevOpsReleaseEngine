@@ -1,0 +1,33 @@
+parameters:
+- name: settings
+  type: object
+- name: resource
+  type: object  
+- name: environment
+  type: string
+  
+jobs:
+        
+  - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+  
+    - deployment: ${{ parameters.resource.name }}iac
+      displayName: IaC - Azure Deployment
+      environment: ${{ parameters.environment }}
+      dependsOn: resourceGroupDeploy
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: AzureResourceManagerTemplateDeployment@3
+                displayName: Creating '${{ parameters.resource.name }}' by IaC
+                inputs:
+                  azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
+                  subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
+                  action: 'Create Or Update Resource Group'
+                  resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
+                  location: ${{ parameters.settings.azure.resourceGroup.location }}
+                  templateLocation: 'Linked artifact'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/infrastructure/${{ parameters.resource.type }}.json'
+                  overrideParameters: ${{ parameters.resource.deploy.infrastructure.overrideParameters }}
+                  deploymentMode: 'Incremental'
+                  deploymentOutputs: 'ArmOutputs'
