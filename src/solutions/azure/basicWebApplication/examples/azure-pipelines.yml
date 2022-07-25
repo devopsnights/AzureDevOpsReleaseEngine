@@ -26,7 +26,7 @@ extends:
         enabled: true
       deploy:
         enabled: true
-        variablesDirectory: /src/cloud/azure/appService/examples/variables
+        variablesDirectory: /src/solutions/azure/basicWebApplication/examples/variables
         infrastructure:
           enabled: true
         application:
