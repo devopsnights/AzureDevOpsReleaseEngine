@@ -12,11 +12,12 @@ steps:
   - checkout: ReleaseEngine
 
   - powershell: |
-      if(${{ parameters.isSolution }} -ne "true")
+      Write-Host ${{ parameters.isSolution }}
+      if("${{ parameters.isSolution }}" -eq "false")
       {
-        $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
-      }else{
         $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/bicep/${{ parameters.resourceType }}.bicep"
+      }else{
+        $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
       }
 
       if(Test-Path "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"){
