@@ -4,14 +4,20 @@ parameters:
   - name: outDir
     type: string
     default: infrastructure
-  - name: bicepFilePath
+  - name: isSolution
     type: string    
-    default: /src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
+    default: false
 
 steps:
   - checkout: ReleaseEngine
 
   - powershell: |
+      if(${{ parameters.isSolution }} -ne "true")
+      {
+        $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
+      }else{
+        $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
+      }
 
       if(Test-Path "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"){
         $sourceDirectory = "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"
@@ -19,7 +25,7 @@ steps:
         $sourceDirectory = "$(Build.SourcesDirectory)"
       }
 
-      $file = Join-Path $sourceDirectory $env:bicepFilePath
+      $file = Join-Path $sourceDirectory $bicepFilePath
 
       Write-Host "##[section]Building bicep file: $file"
 
@@ -31,7 +37,6 @@ steps:
       Get-ChildItem $(build.artifactstagingdirectory)/$env:outDir
     displayName: 'Build bicep artifact' 
     env:
-      bicepFilePath: ${{ parameters.bicepFilePath }}
       outDir: ${{ parameters.outDir }}
 
       
