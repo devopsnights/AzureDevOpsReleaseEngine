@@ -4,7 +4,7 @@ resources:
     type: github
     endpoint: devopsnights
     name: devopsnights/AzureDevOpsReleaseEngine
-    ref: refs/tags/v0.1.1
+    ref: refs/heads/feature/overrideImprovements
     
 trigger:
   branches:
@@ -53,5 +53,8 @@ extends:
             enabled: true
             servicePlanName: $(servicePlanName)
             appServiceName: $(appServiceName)
+            overrideParameters: >
+              -servicePlanName $(servicePlanName)
+              -siteName $(appServiceName)              
           application:
             enabled: true
