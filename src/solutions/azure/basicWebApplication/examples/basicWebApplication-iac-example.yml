@@ -1,0 +1,73 @@
+resources:
+  repositories:
+  - repository: ReleaseEngine
+    type: github
+    endpoint: devopsnights
+    name: devopsnights/AzureDevOpsReleaseEngine
+    ref: refs/heads/feature/basicWebApp
+
+trigger:
+  branches:
+    include:
+    - main
+    - feature/basicWebApp
+  paths:
+    include:
+      - src/solutions/azure/basicWebApplication/examples/*
+      
+pool:
+  vmImage: 'windows-latest'
+
+extends: 
+  template: /src/main.yml
+  parameters:
+    settings:
+      build:
+        enabled: true
+      deploy:
+        enabled: true
+        variablesDirectory: /src/solutions/azure/basicWebApplication/examples/variables
+        infrastructure:
+          enabled: true
+        application:
+          enabled: false
+      azure:
+        subscription:
+          serviceConnection: $(serviceConnection)
+          subscriptionId: $(subscriptionId)
+        resourceGroup:
+          name: $(resourceGroupName)
+          location: $(location)
+          new: true
+      environments:
+        - dev
+        # - uat
+        # - prd
+    resources:
+      
+      # - name: exampleBasicWebApp
+      #   type: basicWebApplication
+      #   enabled: true
+      #   deploy:
+      #     infrastructure:
+      #       enabled: true
+      #       sqlAdminUserName: wesley
+      #       sqlAdminPassword: $(sqlAdminPassword)
+      #       sqlEmailAddress: 'wesley@releaseengine.com'
+      #     application:
+      #       enabled: false
+
+      - name: exampleDotnetCore
+        type: dotnetCore
+        enabled: true
+        deploy:
+          type: basicWebApplication
+          infrastructure:
+            enabled: true
+            servicePlanName: $(servicePlanName)
+            appServiceName: $(appServiceName)
+            sqlAdminUserName: wesley
+            sqlAdminPassword: $(sqlAdminPassword)
+            sqlEmailAddress: 'wesley@releaseengine.com'            
+          application:
+            enabled: true

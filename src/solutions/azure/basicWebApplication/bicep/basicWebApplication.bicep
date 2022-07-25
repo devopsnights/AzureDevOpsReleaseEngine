@@ -29,10 +29,13 @@ param keyVault object = {
   skuFamily: 'A'
 }
 
+@description('Azure App Service instance name.')
+param appServiceName string
+
 @description('Deployment settings for Azure App Service instance.')
 param azureAppService object = {
-  name: 'app-${uniqueString(subscription().subscriptionId, resourceGroup().id)}'
-  webSiteName: 'app-${uniqueString(subscription().subscriptionId, resourceGroup().id)}'
+  name: appServiceName
+  webSiteName: appServiceName
   skuName: 'S1'
   skuCapacity: 1
   autoScaleCpuMax: '80'
