@@ -16,7 +16,7 @@ steps:
       {
         $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
       }else{
-        $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
+        $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/bicep/${{ parameters.resourceType }}.bicep"
       }
 
       if(Test-Path "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"){
