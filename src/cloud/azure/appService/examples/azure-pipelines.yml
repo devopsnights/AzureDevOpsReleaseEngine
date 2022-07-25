@@ -43,13 +43,14 @@ extends:
         # - prd
     resources:
 
-      - name: $(resourceGroupName)
+      - name: resourceGroup
         type: resourceGroup
         enabled: true
         deploy:
           infrastructure:
             enabled: true
             location: $(location)
+            name: $(resourceGroupName)
 
       - name: exampleAppService
         type: appService
