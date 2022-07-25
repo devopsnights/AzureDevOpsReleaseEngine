@@ -52,5 +52,6 @@ extends:
           infrastructure:
             enabled: true
             servicePlanName: $(servicePlanName)
+            appServiceName: $(appServiceName)
           application:
             enabled: false
