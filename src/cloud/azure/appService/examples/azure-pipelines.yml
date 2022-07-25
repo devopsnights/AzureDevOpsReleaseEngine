@@ -4,8 +4,8 @@ resources:
     type: github
     endpoint: devopsnights
     name: devopsnights/AzureDevOpsReleaseEngine
-    ref: refs/tags/v0.1.1
-
+    ref: refs/heads/feature/overrideImprovements
+    
 trigger:
   branches:
     include:
