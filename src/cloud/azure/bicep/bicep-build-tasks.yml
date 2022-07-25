@@ -6,7 +6,7 @@ parameters:
     default: infrastructure
   - name: isSolution
     type: string    
-    default: false
+    default: "false"
 
 steps:
   - checkout: ReleaseEngine
