@@ -24,7 +24,7 @@ jobs:
 
                   Write-Host $bicepPath
 
-                  Get-ChildItem $(Pipeline.Workspace)
+                  Get-ChildItem $(Pipeline.Workspace) -Recurse
               
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating Basic Web Application Solution '${{ parameters.resource.name }}' by IaC
