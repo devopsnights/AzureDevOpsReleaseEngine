@@ -11,11 +11,12 @@ jobs:
         parameters:
           resource: 
             - type: resourceGroup
+              name: resourceGroup
           bicepFilePath: /src/cloud/azure/resourceGroup/bicep/resourceGroup.bicep
           outDir: resourceGroup
 
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: '$(build.artifactstagingdirectory)'
-          artifact: governance
-          publishLocation: 'pipeline'
+      # - task: PublishPipelineArtifact@1
+      #   inputs:
+      #     targetPath: '$(build.artifactstagingdirectory)'
+      #     artifact: governance
+      #     publishLocation: 'pipeline'
