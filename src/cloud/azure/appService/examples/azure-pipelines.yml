@@ -55,6 +55,6 @@ extends:
             appServiceName: $(appServiceName)
             overrideParameters: >
               -servicePlanName $(servicePlanName)
-              -siteName $(appServiceName)              
+              -siteName $(appServiceName)ovr
           application:
             enabled: false
