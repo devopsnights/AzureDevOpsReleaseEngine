@@ -5,4 +5,4 @@ variables:
   resourceGroupName: rg-dotnetcore-releaseengine-prd
 
   servicePlanName: plan-dotnetcore-releaseengine-prd
-  applicationName: app-dotnetcore-releaseengine-prd 
+  appServiceName: app-dotnetcore-releaseengine-prd 
