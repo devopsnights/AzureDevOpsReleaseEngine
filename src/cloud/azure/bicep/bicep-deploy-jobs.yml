@@ -22,6 +22,8 @@ jobs:
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating '${{ parameters.resource.name }}' by IaC
                 inputs:
+                  ${{ if eq(parameters.resource.type, 'resourceGroup') }}:
+                    deploymentScope: 'Subscription'
                   azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
                   subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
                   action: 'Create Or Update Resource Group'
