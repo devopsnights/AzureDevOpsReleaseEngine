@@ -6,14 +6,19 @@ parameters:
 
 jobs:
 
-  - ${{ if eq(parameters.settings.azure.resourceGroup.new, 'true') }}:
-    - template: ../cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
-      parameters:
-        settings: ${{ parameters.settings }}        
+  # - ${{ if eq(parameters.settings.azure.resourceGroup.new, 'true') }}:
+  #   - template: ../cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
+  #     parameters:
+  #       settings: ${{ parameters.settings }}        
   
   - ${{ each resource in parameters.resources }}:  
 
     - ${{ if eq(resource.enabled, 'true') }}:
+
+      - ${{ if eq(resource.type, 'resourceGroup') }}:
+        - template: /src/cloud/azure/resourceGroup/resourceGroup-build-jobs.yml
+          parameters:
+            settings: ${{ parameters.settings }}
 
       - ${{ if eq(resource.type, 'keyVault') }}:
         - template: ../cloud/azure/keyVault/keyVault-build-jobs.yml

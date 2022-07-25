@@ -15,9 +15,6 @@ trigger:
     include:
       - src/cloud/azure/appService/*
       
-pool:
-  vmImage: 'windows-latest'
-  # name: default
 
 extends: 
   template: /src/main.yml
@@ -45,6 +42,15 @@ extends:
         # - uat
         # - prd
     resources:
+
+      - name: $(resourceGroupName)
+        type: resourceGroup
+        enabled: true
+        deploy:
+          infrastructure:
+            enabled: true
+            location: $(location)
+
       - name: exampleAppService
         type: appService
         enabled: true
