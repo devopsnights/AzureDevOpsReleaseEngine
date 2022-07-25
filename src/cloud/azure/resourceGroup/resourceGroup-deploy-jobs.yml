@@ -1,9 +1,10 @@
 parameters:
 - name: settings
   type: object
+- name: resource
+  type: object  
 - name: environment
   type: string
-
 
 jobs:
   - deployment: resourceGroupDeploy
