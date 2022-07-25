@@ -29,19 +29,19 @@ jobs:
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating Basic Web Application Solution '${{ parameters.resource.name }}' by IaC
                 inputs:
-                  azureResourceManagerConnection: '${{ parameters.settings.azure.subscription.serviceConnection }}'
+                  azureResourceManagerConnection: ${{ parameters.settings.azure.subscription.serviceConnection }}
                   subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
-                  action: 'Create Or Update Resource Group'
+                  action: Create Or Update Resource Group
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
-                  templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.resourceType }}.json'
+                  templateLocation: Linked artifact
+                  csmFile: $(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.type }}.json
                   overrideParameters: >
                     -sqlAdminUserName ${{ parameters.resource.deploy.infrastructure.sqlAdminUserName }}
                     -sqlAdminPassword ${{ parameters.resource.deploy.infrastructure.sqlAdminPassword }}
                     -sqlEmailAddress ${{ parameters.resource.deploy.infrastructure.sqlEmailAddress }}
-                  deploymentMode: 'Incremental'
-                  deploymentOutputs: 'ArmOutputs'
+                  deploymentMode: Incremental
+                  deploymentOutputs: ArmOutputs
 
   - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
     - deployment:
