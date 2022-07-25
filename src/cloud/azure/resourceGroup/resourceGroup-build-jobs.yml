@@ -9,7 +9,8 @@ jobs:
 
       - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
-          resourceType: resourceGroup
+          resource: 
+            - type: resourceGroup
           bicepFilePath: /src/cloud/azure/resourceGroup/bicep/resourceGroup.bicep
           outDir: resourceGroup
 
