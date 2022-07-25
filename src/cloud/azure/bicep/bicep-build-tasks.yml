@@ -4,6 +4,9 @@ parameters:
   - name: outDir
     type: string
     default: infrastructure
+  - name: bicepFilePath
+    type: string    
+    default: /src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
 
 steps:
   - checkout: ReleaseEngine
@@ -28,7 +31,7 @@ steps:
       Get-ChildItem $(build.artifactstagingdirectory)/$env:outDir
     displayName: 'Build bicep artifact' 
     env:
-      bicepFilePath: /src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep
+      bicepFilePath: ${{ parameters.bicepFilePath }}
       outDir: ${{ parameters.outDir }}
 
       

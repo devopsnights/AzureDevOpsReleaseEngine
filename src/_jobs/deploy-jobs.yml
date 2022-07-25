@@ -37,3 +37,10 @@ jobs:
             settings: ${{ parameters.settings }}                  
             environment: ${{ parameters.environment }}
             resource: ${{ resource }}
+
+      - ${{ if eq(resource.type, 'basicWebApplication') }}:
+        - template: /src/solutions/azure/basicWebApplication/basicWebApplication-deploy-jobs.yml
+          parameters:
+            settings: ${{ parameters.settings }}                  
+            environment: ${{ parameters.environment }}
+            resource: ${{ resource }}         

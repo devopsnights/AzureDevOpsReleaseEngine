@@ -44,8 +44,8 @@ extends:
         # - uat
         # - prd
     resources:
-      - name: exampleAppService
-        type: appService
+      - name: exampleBasicWebApp
+        type: basicWebApplication
         enabled: true
         deploy:
           infrastructure:

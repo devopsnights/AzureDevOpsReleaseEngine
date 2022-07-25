@@ -30,4 +30,9 @@ jobs:
           parameters:
             resource: ${{ resource }}
 
+      - ${{ if eq(resource.type, 'basicWebApplication') }}:
+        - template: /src/solutions/azure/basicWebApplication/basicWebApplication-build-jobs.yml
+          parameters:
+            resource: ${{ resource }}
+
             
