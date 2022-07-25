@@ -18,6 +18,14 @@ jobs:
         runOnce:
           deploy:
             steps:
+              
+              - powershell: |
+                  $bicepPath = "$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.resourceType }}.json"
+
+                  Write-Host $bicepPath
+
+                  Get-ChildItem $(Pipeline.Workspace)
+              
               - task: AzureResourceManagerTemplateDeployment@3
                 displayName: Creating Basic Web Application Solution '${{ parameters.resource.name }}' by IaC
                 inputs:
