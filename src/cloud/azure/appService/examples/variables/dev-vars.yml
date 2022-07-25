@@ -4,5 +4,5 @@ variables:
   location: northeurope
   resourceGroupName: rg-app-releaseengine-dev
 
-  appServiceName: app-releaseengine-dev
+  appServiceName: app-releaseengine-tst
   servicePlanName: plan-releaseengine-dev
