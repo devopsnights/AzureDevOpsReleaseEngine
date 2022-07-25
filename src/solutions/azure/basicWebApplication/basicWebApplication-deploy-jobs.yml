@@ -37,9 +37,9 @@ jobs:
                   templateLocation: Linked artifact
                   csmFile: $(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.type }}.json
                   overrideParameters: >
-                    -sqlAdminUserName ${{ parameters.resource.deploy.infrastructure.sqlAdminUserName }}
-                    -sqlAdminPassword ${{ parameters.resource.deploy.infrastructure.sqlAdminPassword }}
-                    -sqlEmailAddress ${{ parameters.resource.deploy.infrastructure.sqlEmailAddress }}
+                    -adminUserName ${{ parameters.resource.deploy.infrastructure.sqlAdminUserName }}
+                    -adminPassword ${{ parameters.resource.deploy.infrastructure.sqlAdminPassword }}
+                    -emailAddress ${{ parameters.resource.deploy.infrastructure.sqlEmailAddress }}
                   deploymentMode: Incremental
                   deploymentOutputs: ArmOutputs
 
