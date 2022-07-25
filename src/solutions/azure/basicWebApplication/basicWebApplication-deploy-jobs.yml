@@ -20,7 +20,7 @@ jobs:
             steps:
               
               - powershell: |
-                  $bicepPath = "$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.resourceType }}.json"
+                  $bicepPath = "$(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.type }}.json"
 
                   Write-Host $bicepPath
 
