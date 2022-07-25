@@ -13,7 +13,7 @@ jobs:
     - deployment: ${{ parameters.resource.name }}iac
       displayName: IaC - Azure Deployment
       environment: ${{ parameters.environment }}
-      ${{ if ${{ parameters.resource.dependsOn }} -ne ''}}:
+      ${{ if ne(parameters.resource.dependsOn,'') }}:
         dependsOn: ${{ parameters.resource.dependsOn }}iac
       strategy:
         runOnce:
