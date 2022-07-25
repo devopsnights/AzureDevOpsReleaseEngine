@@ -7,18 +7,23 @@ parameters:
   - name: isSolution
     type: string    
     default: "false"
+  - name: bicepFilePath
+    type: string
 
 steps:
   - checkout: ReleaseEngine
 
   - powershell: |
-      Write-Host ${{ parameters.isSolution }}
-      if("${{ parameters.isSolution }}" -eq "true")
-      {
-        $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
-      }else{
-        $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/bicep/${{ parameters.resourceType }}.bicep"
-      }
+      Write-Host ${{ parameters.bicepFilePath }}
+
+      $bicepFilePath = "${{ parameters.bicepFilePath }}"
+
+      # if("${{ parameters.isSolution }}" -eq "true")
+      # {
+      #   $bicepFilePath = "/src/cloud/azure/${{ parameters.resourceType }}/${{ parameters.resourceType }}.bicep"
+      # }else{
+      #   $bicepFilePath = "/src/solutions/azure/${{ parameters.resourceType }}/bicep/${{ parameters.resourceType }}.bicep"
+      # }
 
       if(Test-Path "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"){
         $sourceDirectory = "$(Build.SourcesDirectory)/$(releaseEngineRepositoryName)"

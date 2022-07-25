@@ -7,9 +7,10 @@ jobs:
     displayName: IaC - Resource Group Build Job
     steps:
 
-      - template: ../bicep/bicep-build-tasks.yml
+      - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
           resourceType: resourceGroup
+          bicepFilePath: /src/cloud/azure/resourceGroup/bicep/resourceGroup.bicep
           outDir: resourceGroup
 
       - task: PublishPipelineArtifact@1

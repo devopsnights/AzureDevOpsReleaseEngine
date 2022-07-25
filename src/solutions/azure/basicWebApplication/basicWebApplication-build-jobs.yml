@@ -8,7 +8,7 @@ jobs:
       - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
           resourceType: basicWebApplication
-          isSolution: true
+          bicepFilePath: /src/solutions/azure/basicWebApplication/bicep/basicWebApplication.bicep
 
       - task: PublishPipelineArtifact@1
         inputs:
