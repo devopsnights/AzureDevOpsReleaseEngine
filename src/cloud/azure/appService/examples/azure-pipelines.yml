@@ -54,10 +54,11 @@ extends:
             overrideParameters: >
               -resourceGroupLocation $(location)
               -resourceGroupName $(resourceGroupName)
-              
+
       - name: exampleAppService
         type: appService
         enabled: true
+        dependsOn: resourceGroup
         deploy:
           infrastructure:
             enabled: true
