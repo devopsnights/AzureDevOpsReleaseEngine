@@ -49,9 +49,12 @@ extends:
         deploy:
           infrastructure:
             enabled: true
-            location: $(location)
-            name: $(resourceGroupName)
-
+            location: 
+            name: 
+            overrideParameters: >
+              -resourceGroupLocation $(location)
+              -resourceGroupName $(resourceGroupName)
+              
       - name: exampleAppService
         type: appService
         enabled: true
