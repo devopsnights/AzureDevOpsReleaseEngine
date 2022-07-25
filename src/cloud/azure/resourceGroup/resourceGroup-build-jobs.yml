@@ -1,5 +1,5 @@
 parameters:
-  - name: settings
+  - name: resource
     type: object
 
 jobs:
@@ -9,11 +9,8 @@ jobs:
 
       - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
         parameters:
-          resource: 
-            - type: resourceGroup
-              name: resourceGroup
+          resource: ${{ parameters.resource }}
           bicepFilePath: /src/cloud/azure/resourceGroup/bicep/resourceGroup.bicep
-          outDir: resourceGroup
 
       # - task: PublishPipelineArtifact@1
       #   inputs:
