@@ -36,8 +36,8 @@ extends:
           serviceConnection: $(serviceConnection)
           subscriptionId: $(subscriptionId)
         resourceGroup:
-          # name: $(resourceGroupName)
-          # location: $(location)
+          name: $(resourceGroupName)
+          location: $(location)
           # new: true
       environments:
         - dev
