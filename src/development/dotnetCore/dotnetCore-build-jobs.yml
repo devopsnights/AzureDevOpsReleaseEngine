@@ -3,14 +3,10 @@ parameters:
     type: object
 
 jobs:
-  # - ${{ if eq(parameters.resource.deploy.type, 'azureWebApp') }}:
-  #   # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
-  #   #   parameters:
-  #   #     resourceType: appService
-  #   - template: ../../cloud/azure/appService/appService-build-jobs.yml
-  #     parameters:
-  #       resource: ${{ parameters.resource }}
-
+  - ${{ if eq(parameters.resource.deploy.type, 'azureWebApp') }}:
+    - template: /src/cloud/azure/appService/appService-build-jobs.yml
+      parameters:
+        resource: ${{ parameters.resource }}        
 
   - job:
     displayName: App - ${{ parameters.resource.name }} Build Job
@@ -50,9 +46,9 @@ jobs:
           arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/application'
           zipAfterPublish: True
 
-      - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
-        parameters:
-          resourceType: appService
+      # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
+      #   parameters:
+      #     resourceType: appService
 
       - task: PublishPipelineArtifact@1
         inputs:
