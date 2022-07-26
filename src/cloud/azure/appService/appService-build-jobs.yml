@@ -2,11 +2,20 @@ parameters:
   - name: resource
     type: object
 jobs:
-  - job:
-    displayName: IaC - Azure App Service Build Job
-    steps:
+  
+  # - template: 
 
-      - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
-        parameters:
-          resource: ${{ parameters.resource }}
-          bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep
+
+  # - job:
+  #   displayName: IaC - Azure App Service Build Job
+  #   steps:
+
+  # - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
+  #   parameters:
+  #     resource: ${{ parameters.resource }}
+  #     bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep
+
+  - template: /src/cloud/azure/bicep/bicep-build-jobs.yml
+    parameters:
+      resource: ${{ parameters.resource }}
+      bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep  
