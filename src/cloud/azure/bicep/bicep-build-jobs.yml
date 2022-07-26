@@ -7,7 +7,7 @@ parameters:
 jobs:
   
   - job:
-    displayName: IaC - Azure Bicep Build Job
+    displayName: IaC - ${{ parameters.resource.name }} Azure Bicep Build Job
     steps:
 
       - template: /src/cloud/azure/bicep/bicep-build-tasks.yml

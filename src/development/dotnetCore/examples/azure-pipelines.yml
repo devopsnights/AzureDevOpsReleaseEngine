@@ -51,8 +51,8 @@ extends:
         deploy:
           infrastructure:
             enabled: true
-            location: 
-            name: 
+            location: $(location)
+            name: $(resourceGroupName)
             overrideParameters: >
               -resourceGroupLocation $(location)
               -resourceGroupName $(resourceGroupName)      
