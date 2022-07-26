@@ -1,6 +1,9 @@
 parameters:
   - name: resource
     type: object
+  - name: bicepFilePath
+    type: string
+
 jobs:
   
   - job:
