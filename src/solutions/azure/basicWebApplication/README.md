@@ -9,5 +9,5 @@ https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/app-
 
 ## Architecture
 
-![Basic Web App](/res/basic-web-app.png"Basic Web App")
+![Basic Web App](/res/basic-web-app.png "Basic Web App")
 

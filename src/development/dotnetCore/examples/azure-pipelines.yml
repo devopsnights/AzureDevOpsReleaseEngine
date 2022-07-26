@@ -36,14 +36,27 @@ extends:
           serviceConnection: $(serviceConnection)
           subscriptionId: $(subscriptionId)
         resourceGroup:
-          name: $(resourceGroupName)
-          location: $(location)
-          new: true
+          # name: $(resourceGroupName)
+          # location: $(location)
+          # new: true
       environments:
         - dev
-        - uat
-        - prd
+        # - uat
+        # - prd
     resources:
+
+      - name: resourceGroup
+        type: resourceGroup
+        enabled: true
+        deploy:
+          infrastructure:
+            enabled: true
+            location: 
+            name: 
+            overrideParameters: >
+              -resourceGroupLocation $(location)
+              -resourceGroupName $(resourceGroupName)      
+
       - name: exampleDotnetCore
         type: dotnetCore
         enabled: true
