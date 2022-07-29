@@ -15,6 +15,11 @@ jobs:
       environment: ${{ parameters.environment }}
       ${{ if ne(parameters.resource.dependsOn,'') }}:
         dependsOn: ${{ parameters.resource.dependsOn }}iac
+      variables:
+        ${{ if ne(parameters.resource.deploy.type,'') }}:
+          bicepFile: ${{ parameters.resource.deploy.type }}.json
+        ${{ else }}:  
+          bicepFile: ${{ parameters.resource.type }}.json
       strategy:
         runOnce:
           deploy:
@@ -30,7 +35,7 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ parameters.resource.type }}.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}.json'
                   overrideParameters: ${{ parameters.resource.deploy.infrastructure.overrideParameters }}
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'

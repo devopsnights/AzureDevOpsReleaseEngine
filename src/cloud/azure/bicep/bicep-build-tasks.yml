@@ -38,7 +38,7 @@ steps:
       Write-Host $file
 
       New-Item -ItemType Directory -Force -Path $(build.artifactstagingdirectory)
-      az bicep build --file $file --outdir $(build.artifactstagingdirectory) --outfile ${{ parameters.resource.type }}
+      az bicep build --file $file --outdir $(build.artifactstagingdirectory)
 
       Get-ChildItem $(build.artifactstagingdirectory)
     displayName: 'Build bicep artifact' 
