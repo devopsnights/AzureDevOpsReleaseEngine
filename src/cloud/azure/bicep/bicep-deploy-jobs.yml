@@ -44,7 +44,7 @@ jobs:
                   resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
                   location: ${{ parameters.settings.azure.resourceGroup.location }}
                   templateLocation: 'Linked artifact'
-                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}.json'
+                  csmFile: '$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}'
                   overrideParameters: ${{ parameters.resource.deploy.infrastructure.overrideParameters }}
                   deploymentMode: 'Incremental'
                   deploymentOutputs: 'ArmOutputs'
