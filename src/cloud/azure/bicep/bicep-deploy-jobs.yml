@@ -10,6 +10,13 @@ jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
   
+    - powershell: |
+        $var = "$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}.json"
+        Write-Host "bicep path"
+        Write-Host $var
+
+        Get-ChildItem $(Pipeline.Workspace) -recurse
+
     - deployment: ${{ parameters.resource.name }}iac
       displayName: IaC - Azure Deployment
       environment: ${{ parameters.environment }}
