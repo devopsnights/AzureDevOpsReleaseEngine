@@ -58,9 +58,8 @@ extends:
               -resourceGroupName $(resourceGroupName)            
 
       - name: exampleBasicWebApp
-        type: basicWebApplication
+        type: dotnetCore
         enabled: true
-        
         deploy:
           type: basicWebApplication
           infrastructure:
