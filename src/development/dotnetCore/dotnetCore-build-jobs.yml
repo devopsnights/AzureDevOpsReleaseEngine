@@ -8,50 +8,51 @@ jobs:
       parameters:
         resource: ${{ parameters.resource }}        
 
-  - job:
-    displayName: App - ${{ parameters.resource.name }} Build Job
-    variables:
-      BuildPlatform: 'Any CPU'
-      BuildConfiguration: 'Release'
-    steps:
-      
-      - checkout: self
-      
-      - task: DotNetCoreCLI@2
-        displayName: Restore
-        inputs:
-          command: restore
-          projects:  |
-            **\*.csproj
+  - ${{ if eq(parameters.resource.deploy.application.enabled, 'true') }}:
+    - job:
+      displayName: App - ${{ parameters.resource.name }} Build Job
+      variables:
+        BuildPlatform: 'Any CPU'
+        BuildConfiguration: 'Release'
+      steps:
+        
+        - checkout: self
+        
+        - task: DotNetCoreCLI@2
+          displayName: Restore
+          inputs:
+            command: restore
+            projects:  |
+              **\*.csproj
 
-      - task: DotNetCoreCLI@2
-        displayName: Build
-        inputs:
-          projects:  |
-            **\*.csproj
+        - task: DotNetCoreCLI@2
+          displayName: Build
+          inputs:
+            projects:  |
+              **\*.csproj
+              arguments: '--configuration $(BuildConfiguration)'
+
+        - task: DotNetCoreCLI@2
+          displayName: Test
+          inputs:
+            command: test
+            projects: '**/*[Tt]ests/*.csproj'
             arguments: '--configuration $(BuildConfiguration)'
 
-      - task: DotNetCoreCLI@2
-        displayName: Test
-        inputs:
-          command: test
-          projects: '**/*[Tt]ests/*.csproj'
-          arguments: '--configuration $(BuildConfiguration)'
+        - task: DotNetCoreCLI@2
+          displayName: Publish
+          inputs:
+            command: publish
+            publishWebProjects: True
+            arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/application'
+            zipAfterPublish: True
 
-      - task: DotNetCoreCLI@2
-        displayName: Publish
-        inputs:
-          command: publish
-          publishWebProjects: True
-          arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/application'
-          zipAfterPublish: True
+        # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
+        #   parameters:
+        #     resourceType: appService
 
-      # - template: ../../cloud/azure/bicep/bicep-build-tasks.yml
-      #   parameters:
-      #     resourceType: appService
-
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: '$(build.artifactstagingdirectory)'
-          artifact: ${{ parameters.resource.name }}
-          publishLocation: 'pipeline'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(build.artifactstagingdirectory)'
+            artifact: ${{ parameters.resource.name }}
+            publishLocation: 'pipeline'
