@@ -9,7 +9,7 @@ parameters:
 jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-    - template: src/cloud/azure/appService/appService-deploy-jobs.yml
+    - template: /src/cloud/azure/appService/appService-deploy-jobs.yml
       parameters:
           settings: ${{ parameters.settings }}                  
           environment: ${{ parameters.environment }}
