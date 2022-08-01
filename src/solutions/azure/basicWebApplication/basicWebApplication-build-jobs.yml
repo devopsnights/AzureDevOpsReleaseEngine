@@ -2,16 +2,21 @@ parameters:
   - name: resource
     type: object
 jobs:
-  - job:
-    displayName: IaC - Basic Web Application Solution Job
-    steps:
-      - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
-        parameters:
-          resourceType: basicWebApplication
-          bicepFilePath: /src/solutions/azure/basicWebApplication/bicep/basicWebApplication.bicep
+  # - job:
+  #   displayName: IaC - Basic Web Application Solution Job
+  #   steps:
+  #     - template: /src/cloud/azure/bicep/bicep-build-tasks.yml
+  #       parameters:
+  #         resourceType: basicWebApplication
+  #         bicepFilePath: /src/solutions/azure/basicWebApplication/bicep/basicWebApplication.bicep
 
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: $(build.artifactstagingdirectory)
-          artifact: ${{ parameters.resource.name }}
-          publishLocation: pipeline
+  #     - task: PublishPipelineArtifact@1
+  #       inputs:
+  #         targetPath: $(build.artifactstagingdirectory)
+  #         artifact: ${{ parameters.resource.name }}
+  #         publishLocation: pipeline
+
+  - template: /src/cloud/azure/bicep/bicep-build-jobs.yml
+    parameters:
+      resource: ${{ parameters.resource }}
+      bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep    

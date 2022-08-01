@@ -9,32 +9,37 @@ parameters:
 jobs:
         
   - ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-  
-    - deployment: ${{ parameters.resource.name }}iac
-      displayName: IaC - Basic Web Application Solution Deployment
-      environment: ${{ parameters.environment }}
-      dependsOn: resourceGroupDeploy
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - task: AzureResourceManagerTemplateDeployment@3
-                displayName: Creating Basic Web Application Solution '${{ parameters.resource.name }}' by IaC
-                inputs:
-                  azureResourceManagerConnection: ${{ parameters.settings.azure.subscription.serviceConnection }}
-                  subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
-                  action: Create Or Update Resource Group
-                  resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
-                  location: ${{ parameters.settings.azure.resourceGroup.location }}
-                  templateLocation: Linked artifact
-                  csmFile: $(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.type }}.json
-                  overrideParameters: >
-                    -adminUserName ${{ parameters.resource.deploy.infrastructure.sqlAdminUserName }}
-                    -adminPassword ${{ parameters.resource.deploy.infrastructure.sqlAdminPassword }}
-                    -emailAddress ${{ parameters.resource.deploy.infrastructure.sqlEmailAddress }}
-                    -appServiceName ${{ parameters.resource.deploy.infrastructure.appServiceName }}
-                  deploymentMode: Incremental
-                  deploymentOutputs: ArmOutputs
+    - template: src/cloud/azure/appService/appService-deploy-jobs.yml
+      parameters:
+          settings: ${{ parameters.settings }}                  
+          environment: ${{ parameters.environment }}
+          resource: ${{ parameters.resource }}  
+
+    # - deployment: ${{ parameters.resource.name }}iac
+    #   displayName: IaC - Basic Web Application Solution Deployment
+    #   environment: ${{ parameters.environment }}
+    #   dependsOn: resourceGroupDeploy
+    #   strategy:
+    #     runOnce:
+    #       deploy:
+    #         steps:
+    #           - task: AzureResourceManagerTemplateDeployment@3
+    #             displayName: Creating Basic Web Application Solution '${{ parameters.resource.name }}' by IaC
+    #             inputs:
+    #               azureResourceManagerConnection: ${{ parameters.settings.azure.subscription.serviceConnection }}
+    #               subscriptionId: ${{ parameters.settings.azure.subscription.subscriptionId }}
+    #               action: Create Or Update Resource Group
+    #               resourceGroupName: ${{ parameters.settings.azure.resourceGroup.name }}
+    #               location: ${{ parameters.settings.azure.resourceGroup.location }}
+    #               templateLocation: Linked artifact
+    #               csmFile: $(Pipeline.Workspace)/${{ parameters.resource.name }}/infrastructure/${{ parameters.resource.type }}.json
+    #               overrideParameters: >
+    #                 -adminUserName ${{ parameters.resource.deploy.infrastructure.sqlAdminUserName }}
+    #                 -adminPassword ${{ parameters.resource.deploy.infrastructure.sqlAdminPassword }}
+    #                 -emailAddress ${{ parameters.resource.deploy.infrastructure.sqlEmailAddress }}
+    #                 -appServiceName ${{ parameters.resource.deploy.infrastructure.appServiceName }}
+    #               deploymentMode: Incremental
+    #               deploymentOutputs: ArmOutputs
 
   - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
     - deployment:
