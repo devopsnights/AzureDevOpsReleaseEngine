@@ -19,7 +19,7 @@ pool:
   vmImage: 'windows-latest'
 
 extends: 
-  template: /src/main.yml
+  template: /src/main.yml@releaseEngine
   parameters:
     settings:
       build:
@@ -56,6 +56,21 @@ extends:
             overrideParameters: >
               -resourceGroupLocation $(location)
               -resourceGroupName $(resourceGroupName)            
+
+      - name: exampleDotnetCore
+        type: dotnetCore
+        enabled: true
+        deploy:
+          type: appService
+          infrastructure:
+            enabled: true
+            servicePlanName: $(servicePlanName)
+            appServiceName: $(appServiceName)
+            overrideParameters: >
+              -servicePlanName $(servicePlanName)
+              -siteName $(appServiceName)              
+          application:
+            enabled: true
 
       - name: exampleBasicWebApp
         type: basicWebApplication
