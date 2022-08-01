@@ -4,7 +4,7 @@ resources:
     type: github
     endpoint: devopsnights
     name: devopsnights/AzureDevOpsReleaseEngine
-    ref: refs/heads/feature/basicWebApp
+    ref: refs/heads/feature/overrideImprovements
 
 trigger:
   branches:
@@ -19,7 +19,7 @@ pool:
   vmImage: 'windows-latest'
 
 extends: 
-  template: /src/main.yml
+  template: /src/main.yml@releaseEngine
   parameters:
     settings:
       build:
@@ -38,13 +38,25 @@ extends:
         resourceGroup:
           name: $(resourceGroupName)
           location: $(location)
-          new: true
+          # new: true
       environments:
         - dev
         # - uat
         # - prd
     resources:
-      
+
+      - name: resourceGroup
+        type: resourceGroup
+        enabled: true
+        deploy:
+          infrastructure:
+            enabled: true
+            location: $(location)
+            name: $(resourceGroupName)
+            overrideParameters: >
+              -resourceGroupLocation $(location)
+              -resourceGroupName $(resourceGroupName)            
+
       - name: exampleBasicWebApp
         type: basicWebApplication
         enabled: true
