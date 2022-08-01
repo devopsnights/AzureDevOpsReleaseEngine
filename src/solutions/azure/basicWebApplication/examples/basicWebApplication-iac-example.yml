@@ -10,7 +10,7 @@ trigger:
   branches:
     include:
     - main
-    - feature/*
+    # - feature/*
   paths:
     include:
       - src/solutions/azure/basicWebApplication/examples/*
