@@ -33,10 +33,10 @@ extends:
         subscription:
           serviceConnection: $(serviceConnection)
           subscriptionId: $(subscriptionId)
-        # resourceGroup:
-        #   name: $(resourceGroupName)
-        #   location: $(location)
-        #   new: true
+        resourceGroup:
+          name: $(resourceGroupName)
+          location: $(location)
+          new: true
       environments:
         - dev
         # - uat
