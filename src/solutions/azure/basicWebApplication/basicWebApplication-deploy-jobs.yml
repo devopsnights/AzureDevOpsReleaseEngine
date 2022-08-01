@@ -41,56 +41,56 @@ jobs:
     #               deploymentMode: Incremental
     #               deploymentOutputs: ArmOutputs
 
-  - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
-    - deployment:
-      displayName: App - Azure App Service Deployment
-      environment: ${{ parameters.environment }}
-      ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-        dependsOn: ${{ parameters.resource.name }}iac
-      ${{ else }}:
-        dependsOn: resourceGroupDeploy
-      strategy:
-        runOnce:
-          deploy:
-            steps:
+  # - ${{ if and(eq(parameters.settings.deploy.application.enabled, 'true'),eq(parameters.resource.deploy.application.enabled, 'true')) }}:
+  #   - deployment:
+  #     displayName: App - Azure App Service Deployment
+  #     environment: ${{ parameters.environment }}
+  #     ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+  #       dependsOn: ${{ parameters.resource.name }}iac
+  #     ${{ else }}:
+  #       dependsOn: resourceGroupDeploy
+  #     strategy:
+  #       runOnce:
+  #         deploy:
+  #           steps:
               
-              - powershell: |
-                  $timeoutMinutes = 2
+  #             - powershell: |
+  #                 $timeoutMinutes = 2
 
-                  $timeout = New-TimeSpan -Minutes $timeoutMinutes
-                  $endTime = (Get-Date).Add($timeout)
+  #                 $timeout = New-TimeSpan -Minutes $timeoutMinutes
+  #                 $endTime = (Get-Date).Add($timeout)
 
-                  do {
-                      Start-Sleep -Seconds 10
+  #                 do {
+  #                     Start-Sleep -Seconds 10
 
-                      Write-Host "##[command]Checking if App Service is available..." -ForegroundColor Blue
+  #                     Write-Host "##[command]Checking if App Service is available..." -ForegroundColor Blue
 
-                      $statusCode = $null
+  #                     $statusCode = $null
 
-                      try {
+  #                     try {
 
-                        $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
+  #                       $uri = "https://${{ parameters.resource.deploy.infrastructure.appServiceName }}.azurewebsites.net"
                         
-                        $req = Invoke-WebRequest -Uri $uri
+  #                       $req = Invoke-WebRequest -Uri $uri
                     
-                        if($null -ne $req.StatusCode){
-                          $statusCode = $req.StatusCode
-                        }
-                        Write-Output    "Status Code -- $statusCode"
-                      } catch {}
+  #                       if($null -ne $req.StatusCode){
+  #                         $statusCode = $req.StatusCode
+  #                       }
+  #                       Write-Output    "Status Code -- $statusCode"
+  #                     } catch {}
                       
-                      $timeoutReached = ((Get-Date) -gt $endTime)
-                      if ($timeoutReached) {
-                          Write-Warning "Timeout reached"
-                          return $false
-                      }
-                  } until ($statusCode -eq 200 -or $timeoutReached)
-                displayName: Waiting web app availability
+  #                     $timeoutReached = ((Get-Date) -gt $endTime)
+  #                     if ($timeoutReached) {
+  #                         Write-Warning "Timeout reached"
+  #                         return $false
+  #                     }
+  #                 } until ($statusCode -eq 200 -or $timeoutReached)
+  #               displayName: Waiting web app availability
               
-              # - ${{ if ne( parameters.resource.type, 'appService') }}:
-              - task: AzureWebApp@1
-                inputs:
-                  azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
-                  appName: ${{ parameters.resource.deploy.infrastructure.appServiceName }}
-                  package: $(Pipeline.Workspace)/${{ parameters.resource.name }}/**/*.zip
+  #             # - ${{ if ne( parameters.resource.type, 'appService') }}:
+  #             - task: AzureWebApp@1
+  #               inputs:
+  #                 azureSubscription: ${{ parameters.settings.azure.subscription.serviceConnection }}
+  #                 appName: ${{ parameters.resource.deploy.infrastructure.appServiceName }}
+  #                 package: $(Pipeline.Workspace)/${{ parameters.resource.name }}/**/*.zip
                     

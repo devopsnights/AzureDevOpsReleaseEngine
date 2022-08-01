@@ -48,6 +48,7 @@ extends:
       - name: resourceGroup
         type: resourceGroup
         enabled: true
+        jobName: resourceGroupIac
         deploy:
           infrastructure:
             enabled: true
@@ -60,6 +61,7 @@ extends:
       - name: exampleBasicWebApp
         type: dotnetCore
         enabled: true
+        dependsOn: resourceGroupIac
         deploy:
           type: basicWebApplication
           infrastructure:

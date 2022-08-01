@@ -19,8 +19,9 @@ jobs:
       environment: ${{ parameters.environment }}
       ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
         dependsOn: ${{ parameters.resource.name }}iac
-      ${{ else }}:
-        dependsOn: resourceGroupDeploy
+      # ${{ else }}:
+      ${{ if ne(parameters.resource.dependsOn,'') }}:
+        dependsOn: ${{ parameters.resource.dependsOn }}
       strategy:
         runOnce:
           deploy:
