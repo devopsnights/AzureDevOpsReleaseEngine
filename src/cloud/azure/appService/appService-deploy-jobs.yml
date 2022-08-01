@@ -17,9 +17,9 @@ jobs:
     - deployment:
       displayName: App - Azure App Service Deployment
       environment: ${{ parameters.environment }}
-      ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
-        dependsOn: ${{ parameters.resource.name }}iac
-      # ${{ else }}:
+      # ${{ if and(eq(parameters.settings.deploy.infrastructure.enabled, 'true'), eq(parameters.resource.deploy.infrastructure.enabled, 'true')) }}:
+      #   dependsOn: ${{ parameters.resource.name }}iac
+      # # ${{ else }}:
       ${{ if ne(parameters.resource.dependsOn,'') }}:
         dependsOn: ${{ parameters.resource.dependsOn }}
       strategy:
