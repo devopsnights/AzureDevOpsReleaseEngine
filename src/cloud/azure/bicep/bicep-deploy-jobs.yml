@@ -32,7 +32,7 @@ jobs:
 
                   Write-Host "bicep path"
 
-                  Write-Host "${{ variables.bicepFile }}"
+                  Write-Host "$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}"
 
                   Get-ChildItem $(Pipeline.Workspace) -recurse
               
