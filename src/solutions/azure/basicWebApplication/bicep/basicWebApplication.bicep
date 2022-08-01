@@ -1,10 +1,10 @@
 @description('The admin user name for the Azure SQL instance.')
-param adminUserName string
+param sqlAdminUserName string
 
 @description('The admin password for the Azure SQL instance.')
 @secure()
-param adminPassword string
-param emailAddress string
+param sqlAdminPassword string
+param sqlEmailAddress string
 
 @description('Deployment settings for the Log Analytics workspace.')
 param logAnalytics object = {
@@ -64,8 +64,8 @@ resource azureSqlDatabase_serverName 'Microsoft.Sql/servers@2020-02-02-preview' 
   name: azureSqlDatabase.serverName
   location: location
   properties: {
-    administratorLogin: adminUserName
-    administratorLoginPassword: adminPassword
+    administratorLogin: sqlAdminUserName
+    administratorLoginPassword: sqlAdminPassword
     version: '12.0'
   }
 }
@@ -239,7 +239,7 @@ resource keyVault_name_Microsoft_Insights_default_azureAppService_name 'Microsof
 resource keyVault_name_sqlServer 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   name: '${keyVault.name}/sqlServer'
   properties: {
-    value: 'Data Source=tcp:${azureSqlDatabase_serverName.properties.fullyQualifiedDomainName},1433;Initial Catalog=${azureSqlDatabase.databaseName};User Id=${adminUserName}@${azureSqlDatabase.serverName};Password=${adminPassword};'
+    value: 'Data Source=tcp:${azureSqlDatabase_serverName.properties.fullyQualifiedDomainName},1433;Initial Catalog=${azureSqlDatabase.databaseName};User Id=${sqlAdminUserName}@${azureSqlDatabase.serverName};Password=${sqlAdminPassword};'
   }
   dependsOn: [
     keyVault_name
@@ -544,7 +544,7 @@ resource email_alert 'microsoft.insights/actionGroups@2019-06-01' = {
     emailReceivers: [
       {
         name: 'emailAction'
-        emailAddress: emailAddress
+        emailAddress: sqlEmailAddress
         useCommonAlertSchema: false
       }
     ]

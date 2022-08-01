@@ -63,8 +63,9 @@ extends:
         deploy:
           infrastructure:
             enabled: true
-            sqlAdminUserName: wesley
-            sqlAdminPassword: $(sqlAdminPassword)
-            sqlEmailAddress: 'wesley@releaseengine.com'
+            overrideParameters: >
+              -sqlAdminUserName wesley
+              -sqlAdminPassword $(sqlAdminPassword)
+              -sqlEmailAddress wesley@releaseengine.com
           application:
             enabled: false
