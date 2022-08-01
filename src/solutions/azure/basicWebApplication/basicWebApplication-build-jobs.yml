@@ -19,4 +19,4 @@ jobs:
   - template: /src/cloud/azure/bicep/bicep-build-jobs.yml
     parameters:
       resource: ${{ parameters.resource }}
-      bicepFilePath: /src/cloud/azure/appService/bicep/appService.bicep    
+      bicepFilePath: /src/solutions/azure/basicWebApplication/bicep/basicWebApplication.bicep
