@@ -61,7 +61,7 @@ extends:
         type: dotnetCore
         enabled: true
         deploy:
-          type: azureWebApp
+          type: appService
           infrastructure:
             enabled: true
             servicePlanName: $(servicePlanName)

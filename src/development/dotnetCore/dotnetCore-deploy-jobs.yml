@@ -8,7 +8,7 @@ parameters:
 
 jobs:
   
-  - ${{ if eq(parameters.resource.deploy.type, 'azureWebApp') }}:
+  - ${{ if eq(parameters.resource.deploy.type, 'appService') }}:
 
       - template: ../../cloud/azure/appService/appService-deploy-jobs.yml
         parameters:
