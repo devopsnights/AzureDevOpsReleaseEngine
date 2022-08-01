@@ -70,4 +70,4 @@ extends:
               -servicePlanName $(servicePlanName)
               -siteName $(appServiceName)              
           application:
-            enabled: false
+            enabled: true
