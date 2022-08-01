@@ -27,9 +27,12 @@ jobs:
           deploy:
             steps:
               - powershell: |
-                  $var = "$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}.json"
+                  # $var = "$(Pipeline.Workspace)/${{ parameters.resource.name }}-iac/${{ variables.bicepFile }}.json"
+                  # Write-Host $var
+
                   Write-Host "bicep path"
-                  Write-Host $var
+
+                  Write-Host "${{ variables.bicepFile }}"
 
                   Get-ChildItem $(Pipeline.Workspace) -recurse
               
