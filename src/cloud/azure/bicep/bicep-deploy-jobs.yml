@@ -16,7 +16,7 @@ jobs:
       displayName: IaC -  ${{ parameters.resource.name }} - Azure Deployment
       environment: ${{ parameters.environment }}
       ${{ if ne(parameters.resource.dependsOn,'') }}:
-        dependsOn: ${{ parameters.resource.dependsOn }}iac
+        dependsOn: ${{ parameters.resource.dependsOn }}
       variables:
         ${{ if ne(parameters.resource.deploy.type,'') }}:
           bicepFile: ${{ parameters.resource.deploy.type }}.json
