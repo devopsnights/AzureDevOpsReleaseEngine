@@ -44,6 +44,19 @@ extends:
         # - uat
         # - prd
     resources:
+
+      - name: resourceGroup
+        type: resourceGroup
+        enabled: true
+        deploy:
+          infrastructure:
+            enabled: true
+            location: $(location)
+            name: $(resourceGroupName)
+            overrideParameters: >
+              -resourceGroupLocation $(location)
+              -resourceGroupName $(resourceGroupName)            
+
       - name: exampleBasicWebApp
         type: basicWebApplication
         enabled: true
