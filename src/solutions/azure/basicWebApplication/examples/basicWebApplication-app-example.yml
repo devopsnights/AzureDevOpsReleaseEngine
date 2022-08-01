@@ -4,13 +4,13 @@ resources:
     type: github
     endpoint: devopsnights
     name: devopsnights/AzureDevOpsReleaseEngine
-    ref: refs/heads/feature/basicWebApp
+    ref: refs/heads/feature/overrideImprovements
 
 trigger:
   branches:
     include:
     - main
-    - feature/basicWebApp
+    - feature/*
   paths:
     include:
       - src/solutions/azure/basicWebApplication/examples/*
@@ -19,7 +19,7 @@ pool:
   vmImage: 'windows-latest'
 
 extends: 
-  template: /src/main.yml
+  template: /src/main.yml@releaseEngine
   parameters:
     settings:
       build:
@@ -38,24 +38,52 @@ extends:
         resourceGroup:
           name: $(resourceGroupName)
           location: $(location)
-          new: true
+          # new: true
       environments:
         - dev
         # - uat
         # - prd
     resources:
-   
-      - name: exampleDotnetCore
-        type: dotnetCore
+
+      - name: resourceGroup
+        type: resourceGroup
         enabled: true
+        deploy:
+          infrastructure:
+            enabled: true
+            location: $(location)
+            name: $(resourceGroupName)
+            overrideParameters: >
+              -resourceGroupLocation $(location)
+              -resourceGroupName $(resourceGroupName)            
+
+      - name: exampleBasicWebApp
+        type: basicWebApplication
+        enabled: true
+        
         deploy:
           type: basicWebApplication
           infrastructure:
             enabled: true
-            servicePlanName: $(servicePlanName)
             appServiceName: $(appServiceName)
-            sqlAdminUserName: wesley
-            sqlAdminPassword: $(sqlAdminPassword)
-            sqlEmailAddress: 'wesley@releaseengine.com'            
+            overrideParameters: >
+              -sqlAdminUserName wesley
+              -sqlAdminPassword $(sqlAdminPassword)
+              -sqlEmailAddress wesley@releaseengine.com
+              -appServiceName appservicetestwes
           application:
-            enabled: true
+            enabled: false
+      # - name: exampleDotnetCore
+      #   type: dotnetCore
+      #   enabled: true
+      #   deploy:
+      #     type: basicWebApplication
+      #     infrastructure:
+      #       enabled: true
+      #       servicePlanName: $(servicePlanName)
+      #       appServiceName: $(appServiceName)
+      #       sqlAdminUserName: wesley
+      #       sqlAdminPassword: $(sqlAdminPassword)
+      #       sqlEmailAddress: 'wesley@releaseengine.com'            
+      #     application:
+      #       enabled: true
