@@ -8,6 +8,11 @@ jobs:
       parameters:
         resource: ${{ parameters.resource }}        
 
+  - ${{ if eq(parameters.resource.deploy.type, 'appService') }}:
+    - template: /src/solutions/azure/basicWebApplication/basicWebApplication-build-jobs.yml
+      parameters:
+        resource: ${{ parameters.resource }}   
+
   - ${{ if eq(parameters.resource.deploy.application.enabled, 'true') }}:
     - job:
       displayName: App - ${{ parameters.resource.name }} Build Job
