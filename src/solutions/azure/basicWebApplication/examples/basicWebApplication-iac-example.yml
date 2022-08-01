@@ -60,6 +60,7 @@ extends:
       - name: exampleBasicWebApp
         type: basicWebApplication
         enabled: true
+        
         deploy:
           infrastructure:
             enabled: true
@@ -67,5 +68,6 @@ extends:
               -sqlAdminUserName wesley
               -sqlAdminPassword $(sqlAdminPassword)
               -sqlEmailAddress wesley@releaseengine.com
+              -appServiceName appservicetestwes
           application:
             enabled: false
