@@ -214,27 +214,27 @@ resource keyVault_name 'Microsoft.KeyVault/vaults@2019-09-01' = {
   }
 }
 
-resource keyVault_name_Microsoft_Insights_default_azureAppService_name 'Microsoft.KeyVault/vaults/providers/diagnosticSettings@2017-05-01-preview' = {
-  name: '${keyVault.name}/Microsoft.Insights/default${azureAppService.name}'
-  properties: {
-    workspaceId: logAnalytics_name.id
-    logs: [
-      {
-        category: 'AuditEvent'
-        enabled: true
-      }
-    ]
-    metrics: [
-      {
-        category: 'AllMetrics'
-        enabled: true
-      }
-    ]
-  }
-  dependsOn: [
-    keyVault_name
-  ]
-}
+// resource keyVault_name_Microsoft_Insights_default_azureAppService_name 'Microsoft.KeyVault/vaults/providers/diagnosticSettings@2017-05-01-preview' = {
+//   name: '${keyVault.name}/Microsoft.Insights/default${azureAppService.name}'
+//   properties: {
+//     workspaceId: logAnalytics_name.id
+//     logs: [
+//       {
+//         category: 'AuditEvent'
+//         enabled: true
+//       }
+//     ]
+//     metrics: [
+//       {
+//         category: 'AllMetrics'
+//         enabled: true
+//       }
+//     ]
+//   }
+//   dependsOn: [
+//     keyVault_name
+//   ]
+// }
 
 resource keyVault_name_sqlServer 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
   name: '${keyVault.name}/sqlServer'
