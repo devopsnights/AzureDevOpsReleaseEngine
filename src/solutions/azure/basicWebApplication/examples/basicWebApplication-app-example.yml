@@ -73,7 +73,7 @@ extends:
               -sqlEmailAddress wesley@releaseengine.com
               -appServiceName appservicetestwes
           application:
-            enabled: false
+            enabled: true
      
      
       # - name: exampleDotnetCore
